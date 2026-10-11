@@ -16,12 +16,31 @@ export const profile = {
   ],
 };
 
-export const projects = [
+export type Project = {
+  title: string;
+  description: string;
+  stack: string[];
+  visibility: "publico" | "confidencial";
+  year?: string;
+  demo?: string;
+  repo?: string;
+};
+
+export const projects: Project[] = [
+  {
+    title: "scompras — Carga y validación de documentos fiscales",
+    description:
+      "Sistema desarrollado desde cero para cargar, validar y reportar documentos fiscales: facturas, retenciones de IVA e ISLR. El documento subido pasa por OCR en Power Automate, y luego Python con una IA (ChatGPT) ordena el texto extraído en campos estructurados dentro de la base de datos. Permite crear lotes, contrastar la información extraída contra la imagen del documento y generar reportes con montos, IVA, exento y productos. Desde una API se conecta con el ERP del cliente para enviar los documentos. Seguridad con JWT, HMAC y bcrypt.",
+    stack: ["React", ".NET 10", "MS SQL 2021", "Python", "Power Automate", "OpenAI"],
+    visibility: "confidencial",
+    year: "2025 – 2026",
+  },
   {
     title: "Nombre del proyecto",
     description:
       "Describe el problema que resuelve y qué lo hace interesante. Una o dos frases con intención.",
     stack: ["React", "NestJS", "PostgreSQL"],
+    visibility: "publico",
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },
@@ -30,6 +49,7 @@ export const projects = [
     description:
       "Qué construiste, para quién, y qué aprendiste. Muestra decisiones, no solo resultados.",
     stack: ["Go", "Docker", "Grafana"],
+    visibility: "publico",
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },
@@ -38,14 +58,7 @@ export const projects = [
     description:
       "Un proyecto personal o de exploración. Aquí cabe lo raro, lo divertido o lo educativo.",
     stack: ["SvelteKit", "TypeScript", "Vite"],
-    demo: "https://ejemplo.dev",
-    repo: "https://github.com/tunombre/proyecto",
-  },
-  {
-    title: "Herramienta interna",
-    description:
-      "Algo que hizo tu día a día (o el de tu equipo) más fácil. Los proyectos utilitarios también cuentan historias.",
-    stack: ["Next.js", "MS SQL", "Power BI"],
+    visibility: "publico",
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },

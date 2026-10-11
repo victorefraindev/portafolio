@@ -1,4 +1,64 @@
 import { projects } from "~/data/site";
+import type { Project } from "~/data/site";
+
+function ProjectCard({ project }: { project: Project }) {
+  const confidential = project.visibility === "confidencial";
+  return (
+    <article className="group relative flex flex-col bg-bg p-8 transition-colors duration-300 hover:bg-surface md:p-10">
+      <span
+        aria-hidden="true"
+        className={`absolute right-6 top-6 inline-block h-2 w-2 rotate-45 border transition-opacity duration-300 ${
+          confidential
+            ? "border-ocean opacity-70 group-hover:opacity-100"
+            : "border-nova opacity-40 group-hover:opacity-100"
+        }`}
+      />
+      <h3 className="font-display text-2xl font-medium tracking-tight text-fg">
+        {project.title}
+      </h3>
+      <p className="mt-4 font-mono text-sm text-faint">
+        {project.stack.join(", ")}
+      </p>
+      {project.year && (
+        <p className="mt-1 font-mono text-sm text-faint">{project.year}</p>
+      )}
+      <p className="mt-5 flex-1 leading-relaxed text-muted">
+        {project.description}
+      </p>
+
+      {confidential ? (
+        <div className="mt-8">
+          <p className="flex items-center gap-2 font-mono text-sm text-faint">
+            <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rotate-45 bg-ocean" />
+            Trabajo de empresa · confidencial
+          </p>
+          <p className="mt-3 text-sm text-faint">
+            Detalles protegidos por NDA.
+          </p>
+        </div>
+      ) : (
+        <div className="mt-8 flex flex-wrap gap-6">
+          <a
+            href={project.demo}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
+          >
+            Demo
+          </a>
+          <a
+            href={project.repo}
+            target="_blank"
+            rel="noreferrer"
+            className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
+          >
+            Código
+          </a>
+        </div>
+      )}
+    </article>
+  );
+}
 
 export function Projects() {
   return (
@@ -8,47 +68,13 @@ export function Projects() {
       </h2>
       <p className="mt-5 max-w-prose text-lg text-muted">
         Una selección de trabajos, en orden inverso. Cada uno con su historia y
-        sus decisiones.
+        sus decisiones. Algunos son de empresa y se muestran sin detalles
+        sensibles.
       </p>
 
       <div className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2">
         {projects.map((p) => (
-          <article
-            key={p.title}
-            className="group relative flex flex-col bg-bg p-8 transition-colors duration-300 hover:bg-surface md:p-10"
-          >
-            <span
-              aria-hidden="true"
-              className="absolute right-6 top-6 inline-block h-2 w-2 rotate-45 border border-nova opacity-40 transition-opacity duration-300 group-hover:opacity-100"
-            />
-            <h3 className="font-display text-2xl font-medium tracking-tight text-fg">
-              {p.title}
-            </h3>
-            <p className="mt-4 font-mono text-sm text-faint">
-              {p.stack.join(", ")}
-            </p>
-            <p className="mt-5 flex-1 leading-relaxed text-muted">
-              {p.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-6">
-              <a
-                href={p.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
-              >
-                Demo
-              </a>
-              <a
-                href={p.repo}
-                target="_blank"
-                rel="noreferrer"
-                className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
-              >
-                Código
-              </a>
-            </div>
-          </article>
+          <ProjectCard key={p.title} project={p} />
         ))}
       </div>
     </section>
