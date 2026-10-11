@@ -65,6 +65,12 @@ export function Hero() {
   const reduce = useReducedMotion();
   const typed = useTypewriter(profile.name);
 
+  // Región de apellidos: "Víctor Efraín <Armao Medina>"
+  const nameWords = profile.name.split(" ");
+  const surnameStart = nameWords[0].length + 1 + nameWords[1].length;
+  const givenPart = typed.slice(0, surnameStart);
+  const surnamePart = typed.slice(surnameStart);
+
   const container: Variants = {
     hidden: {},
     show: {
@@ -104,7 +110,10 @@ export function Hero() {
             className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight text-fg md:text-7xl"
           >
             <span className="sr-only">{profile.name}</span>
-            <span aria-hidden="true">{typed}</span>
+            <span aria-hidden="true">
+              <span className="text-fg">{givenPart}</span>
+              <span className="text-ocean">{surnamePart}</span>
+            </span>
             <span
               aria-hidden="true"
               className={`ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.08em] bg-violet ${reduce ? "opacity-100" : "cursor-blink"}`}
