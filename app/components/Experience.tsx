@@ -1,4 +1,4 @@
-import { experience } from "~/data/site";
+import { education, experience } from "~/data/site";
 
 export function Experience() {
   return (
@@ -12,7 +12,7 @@ export function Experience() {
       <ol className="mt-14 space-y-0">
         {experience.map((job, i) => (
           <li
-            key={job.period}
+            key={job.role + job.period}
             className="group relative grid gap-2 border-t border-line py-10 first:border-t-0 md:grid-cols-[120px_1fr] md:gap-10 md:py-12"
           >
             <span className="font-mono text-sm text-faint">
@@ -29,6 +29,26 @@ export function Experience() {
               <p className="mt-5 max-w-prose leading-relaxed text-muted">
                 {job.description}
               </p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <h3 className="mt-16 font-display text-2xl font-medium tracking-tight text-fg">
+        Formación
+      </h3>
+      <ol className="mt-8 space-y-0">
+        {education.map((item) => (
+          <li
+            key={item.title}
+            className="grid gap-2 border-t border-line py-8 first:border-t-0 md:grid-cols-[120px_1fr] md:gap-10"
+          >
+            <span className="font-mono text-sm text-faint">{item.period}</span>
+            <div className="md:pl-10">
+              <h4 className="font-display text-xl font-medium tracking-tight text-fg">
+                {item.title}
+              </h4>
+              <p className="mt-1 text-fg/70">{item.institution}</p>
             </div>
           </li>
         ))}

@@ -1,16 +1,17 @@
 export const profile = {
-  name: "Tu Nombre",
-  role: "Desarrollador Frontend",
+  name: "Víctor Efraín Armao Medina",
+  shortName: "Víctor Armao",
+  role: "Desarrollador Fullstack y DevOps",
   availability: "Disponible para nuevos proyectos",
-  location: "Ciudad, País",
-  email: "hola@tudominio.dev",
+  location: "Caracas, Venezuela",
+  email: "victorarmao16@gmail.com",
   github: "https://github.com/tunombre",
   linkedin: "https://www.linkedin.com/in/tunombre",
   blurb:
-    "Convierto ideas en interfaces claras y rápidas para la web. Me gusta el detalle: tipografía, ritmo, y que las cosas funcionen bien en cualquier pantalla.",
+    "Desarrollo aplicaciones de punta a punta y las despliego en producción. Me gusta escribir código limpio y mantener la infraestructura estable y observable.",
   about: [
-    "Soy desarrollador frontend con experiencia construyendo productos web de punta a punta. Trabajo con React, TypeScript y las herramientas que lo rodean, y me interesa tanto la parte visible (las interfaces) como la que no se ve (rendimiento, accesibilidad, mantenibilidad).",
-    "Cuando no estoy escribiendo código, probablemente esté trasteando con algo nuevo, leyendo sobre diseño, o perdido en un proyecto personal que empezó como un experimento.",
+    "Soy desarrollador fullstack con trabajo de la interfaz al servidor: React, SvelteKit y Next.js en el frontend; NestJS, Go y .NET en el backend, con PostgreSQL y MS SQL debajo. Diseño, construyo y despliego aplicaciones web desde cero, y me interesa el ciclo completo: modelado de datos, APIs, pruebas y puesta en producción.",
+    "También administro la infraestructura que sostiene lo que construyo: servidores Linux (Ubuntu), contenedores con Docker y monitoreo con Grafana. Creo que un producto no está terminado cuando corre, sino cuando se puede observar y operar con confianza.",
   ],
 };
 
@@ -19,7 +20,7 @@ export const projects = [
     title: "Nombre del proyecto",
     description:
       "Describe el problema que resuelve y qué lo hace interesante. Una o dos frases con intención.",
-    stack: ["React", "TypeScript", "Tailwind CSS"],
+    stack: ["React", "NestJS", "PostgreSQL"],
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },
@@ -27,7 +28,7 @@ export const projects = [
     title: "Otro proyecto",
     description:
       "Qué construiste, para quién, y qué aprendiste. Muestra decisiones, no solo resultados.",
-    stack: ["Node.js", "PostgreSQL", "Docker"],
+    stack: ["Go", "Docker", "Grafana"],
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },
@@ -35,7 +36,7 @@ export const projects = [
     title: "Un experimento",
     description:
       "Un proyecto personal o de exploración. Aquí cabe lo raro, lo divertido o lo educativo.",
-    stack: ["Vite", "Canvas API", "WebGL"],
+    stack: ["SvelteKit", "TypeScript", "Vite"],
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },
@@ -43,7 +44,7 @@ export const projects = [
     title: "Herramienta interna",
     description:
       "Algo que hizo tu día a día (o el de tu equipo) más fácil. Los proyectos utilitarios también cuentan historias.",
-    stack: ["React", "Firebase", "Zustand"],
+    stack: ["Next.js", "MS SQL", "Power BI"],
     demo: "https://ejemplo.dev",
     repo: "https://github.com/tunombre/proyecto",
   },
@@ -51,40 +52,58 @@ export const projects = [
 
 export const skills = [
   {
+    group: "Lenguajes",
+    items: ["JavaScript", "Python", "Go", "C#"],
+  },
+  {
     group: "Frontend",
-    items: ["React", "TypeScript", "CSS", "Tailwind CSS", "Vite"],
+    items: ["React", "SvelteKit", "Next.js"],
   },
   {
     group: "Backend",
-    items: ["Node.js", "Express", "PostgreSQL", "REST APIs"],
+    items: ["NestJS", "Go", ".NET"],
   },
   {
-    group: "Herramientas",
-    items: ["Git", "Figma", "Vitest", "Vercel"],
+    group: "Bases de datos",
+    items: ["PostgreSQL", "MS SQL"],
+  },
+  {
+    group: "DevOps",
+    items: ["Docker", "Linux", "Git", "Grafana"],
+  },
+  {
+    group: "Datos",
+    items: ["Excel", "Power BI"],
   },
 ];
 
 export const experience = [
   {
-    role: "Desarrollador Frontend",
-    company: "Empresa o estudio",
-    period: "2023 – 2026",
+    role: "Desarrollador Fullstack y DevOps",
+    company: "Avatsis C.A — Altamira",
+    period: "2025 – 2026",
     description:
-      "Trabajando en producto, de la mano de diseño y backend. Responsable de componentes, rendimiento y accesibilidad.",
+      "Desarrollo de aplicaciones web End-to-End: interfaces, lógica de negocio, APIs y modelado de bases de datos relacionales. Gestión del ciclo de vida completo del software, desde el control de versiones con Git y las pruebas, hasta el despliegue en producción.",
   },
   {
-    role: "Desarrollador Web",
-    company: "Agencia digital",
-    period: "2021 – 2023",
+    role: "Infraestructura y monitoreo",
+    company: "Avatsis C.A",
+    period: "En el mismo rol",
     description:
-      "Sitios y apps para clientes de varios sectores. Aprendí a traducir requerimientos vagos en interfaces útiles.",
+      "Administración de servidores Linux (Ubuntu), contenedorización con Docker y monitoreo con Grafana para visualizar métricas de rendimiento. Dashboards interactivos en Power BI para el seguimiento de métricas clave sobre PostgreSQL y MS SQL.",
+  },
+];
+
+export const education = [
+  {
+    title: "TSU en Informática",
+    institution: "Instituto Universitario de Mercadotecnia (ISUM) — Sabana Grande",
+    period: "2024 – 2026",
   },
   {
-    role: "Freelance y estudios",
-    company: "Por cuenta propia",
-    period: "2020 – 2021",
-    description:
-      "Primeros proyectos, bases sólidas: HTML, CSS, JavaScript y mucho ensayo y error.",
+    title: "Técnico medio en Electrónica",
+    institution: "Escuela Técnica Gregorio Mac Gregor",
+    period: "2018 – 2023",
   },
 ];
 

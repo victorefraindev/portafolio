@@ -31,7 +31,7 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:px-10">
         <a
           href="#inicio"
-          className="font-display text-lg font-semibold tracking-tight text-fg"
+          className="font-display text-base font-semibold tracking-tight text-fg sm:text-lg"
           onClick={() => setOpen(false)}
         >
           {profile.name}

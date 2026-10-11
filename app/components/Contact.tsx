@@ -1,10 +1,23 @@
 import { contactNote, profile } from "~/data/site";
 
-const channels = [
+type Channel = {
+  label: string;
+  href: string;
+  value: string;
+  download?: boolean;
+};
+
+const channels: Channel[] = [
   {
     label: "Correo",
     href: `mailto:${profile.email}`,
     value: profile.email,
+  },
+  {
+    label: "Currículum",
+    href: "/curriculum.pdf",
+    value: "Descargar CV (PDF)",
+    download: true,
   },
   {
     label: "GitHub",
@@ -31,6 +44,7 @@ export function Contact() {
           <li key={c.label} className="border-t border-line first:border-t-0">
             <a
               href={c.href}
+              download={c.download ?? undefined}
               target={c.href.startsWith("mailto:") ? undefined : "_blank"}
               rel={c.href.startsWith("mailto:") ? undefined : "noreferrer"}
               className="group flex flex-col gap-1 py-6 transition-colors hover:bg-surface sm:flex-row sm:items-baseline sm:justify-between"
