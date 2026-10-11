@@ -7,6 +7,7 @@ export const profile = {
   email: "victorarmao16@gmail.com",
   github: "https://github.com/tunombre",
   linkedin: "https://www.linkedin.com/in/tunombre",
+  avatar: "/profile.png",
   blurb:
     "Desarrollo aplicaciones de punta a punta y las despliego en producción. Me gusta escribir código limpio y mantener la infraestructura estable y observable.",
   about: [

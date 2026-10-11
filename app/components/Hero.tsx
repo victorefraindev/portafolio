@@ -92,11 +92,12 @@ export function Hero() {
       id="inicio"
       className="relative mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-10"
     >
-      <div className="relative flex min-h-[100svh] max-w-3xl flex-col justify-center pt-20">
+      <div className="relative grid min-h-[100svh] items-center gap-12 pt-20 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-20">
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
+          className="max-w-3xl"
         >
           <motion.p
             variants={item}
@@ -155,6 +156,35 @@ export function Hero() {
             />
             {profile.availability}
           </motion.p>
+        </motion.div>
+
+        {/* Marco de identidad */}
+        <motion.div
+          variants={item}
+          className="relative mx-auto w-56 lg:mx-0 lg:w-auto"
+        >
+          <div
+            aria-hidden="true"
+            className="absolute -inset-8 rounded-[2rem] blur-2xl"
+            style={{
+              background:
+                "radial-gradient(60% 60% at 50% 45%, color-mix(in oklab, var(--violet) 22%, transparent) 0%, transparent 75%)",
+            }}
+          />
+          <div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-surface p-2.5">
+            <img
+              src={profile.avatar}
+              alt={`Retrato de ${profile.shortName}`}
+              width={660}
+              height={660}
+              decoding="async"
+              className="aspect-square w-full rounded-[0.75rem] object-cover"
+            />
+          </div>
+          <span
+            aria-hidden="true"
+            className="absolute -right-1.5 -top-1.5 inline-block h-3 w-3 rotate-45 border border-violet bg-bg"
+          />
         </motion.div>
       </div>
     </section>
