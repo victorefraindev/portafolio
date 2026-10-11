@@ -33,7 +33,7 @@ export const projects: Project[] = [
     description:
       "Sistema desarrollado desde cero para cargar, validar y reportar documentos fiscales: facturas, retenciones de IVA e ISLR. El documento subido pasa por OCR en Power Automate, y luego Python con una IA (ChatGPT) ordena el texto extraído en campos estructurados dentro de la base de datos. Permite crear lotes, contrastar la información extraída contra la imagen del documento y generar reportes con montos, IVA, exento y productos. Desde una API se conecta con el ERP del cliente. Seguridad con JWT, HMAC y bcrypt.",
     stack: ["React", ".NET 10", "MS SQL 2021", "Python", "Power Automate", "OpenAI"],
-    infra: "Despliegue en un servidor Ubuntu: base de datos y tablas configuradas, usuario de BD propio, Docker (con Dozzle para el estado de contenedores), Vault para secretos y Grafana Alloy enviando métricas a Grafana. CI/CD con pruebas unitarias, integración por SSH con un usuario de permisos mínimos que solo ejecuta un script definido para montar y actualizar el sistema. Nginx para el frontend.",
+    infra: "Despliegue en un servidor Ubuntu: base de datos y tablas configuradas, usuario de BD propio, Docker (con Dozzle para el estado de contenedores) y Vault para secretos. Observabilidad completa con Grafana, Prometheus (métricas) y Loki (logs), recolectados por Grafana Alloy. CI/CD con pruebas unitarias, integración por SSH con un usuario de permisos mínimos que solo ejecuta un script definido para montar y actualizar el sistema. Nginx para el frontend.",
     visibility: "confidencial",
     year: "2025 – 2026",
   },
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     description:
       "Web app para la aprobación y rechazo de documentos siguiendo tipos de flujos específicos. Se conecta vía API con scompras: cuando un documento necesita un proveedor en el ERP, extrae la información de la factura y la envía a apprva mediante un flujo de petición de creación de proveedor; también incluye un flujo para verificar si una factura tiene derecho a crédito fiscal. El panel de administrador permite invitar usuarios por Resend, asignar roles por flujo, y al primer inicio de sesión se registra un código QR en un autenticador para usar TOTP. Incluye sección de estadísticas con gráficos de documentos enviados, configuración de webhook para sistemas externos y documentación de la API. Seguridad con API key, HMAC, nonce y JWT.",
     stack: ["React", "NestJS", "PostgreSQL", "Resend", "TOTP", "Webhooks"],
-    infra: "Misma infraestructura que el resto de los servicios: servidor Ubuntu, Docker, Vault, Grafana Alloy y CI/CD con pruebas unitarias e integración por SSH con usuario de permisos mínimos. Nginx para el frontend.",
+    infra: "Misma infraestructura que el resto de los servicios: servidor Ubuntu, Docker, Vault, y observabilidad con Grafana, Prometheus y Loki vía Grafana Alloy. CI/CD con pruebas unitarias e integración por SSH con usuario de permisos mínimos. Nginx para el frontend.",
     visibility: "confidencial",
     year: "2026",
   },
