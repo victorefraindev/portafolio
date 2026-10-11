@@ -26,6 +26,13 @@ function ProjectCard({ project }: { project: Project }) {
         {project.description}
       </p>
 
+      {project.infra && (
+        <div className="mt-6">
+          <p className="font-mono text-sm text-faint">Infraestructura</p>
+          <p className="mt-2 leading-relaxed text-muted">{project.infra}</p>
+        </div>
+      )}
+
       {confidential ? (
         <div className="mt-8">
           <p className="flex items-center gap-2 font-mono text-sm text-faint">
