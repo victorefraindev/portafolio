@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import type { Transition, Variants } from "motion/react";
 import { profile } from "~/data/site";
@@ -28,6 +28,39 @@ function useTypewriter(text: string, speed = 75) {
   return display;
 }
 
+/** Resalta palabras concretas del texto con un tono azul. */
+function Accent({ children }: { children: React.ReactNode }) {
+  return <span className="text-ocean">{children}</span>;
+}
+
+function SplitByPhrases({ text }: { text: string }) {
+  const phrases = ["punta a punta", "código limpio", "infraestructura estable y observable"];
+  let remaining: string = text;
+  const parts: React.ReactNode[] = [];
+  let key = 0;
+
+  while (remaining.length > 0) {
+    const next = phrases
+      .map((p) => ({ p, i: remaining.toLowerCase().indexOf(p.toLowerCase()) }))
+      .filter((x) => x.i !== -1)
+      .sort((a, b) => a.i - b.i)[0];
+
+    if (!next) {
+      parts.push(<Fragment key={key++}>{remaining}</Fragment>);
+      break;
+    }
+
+    if (next.i > 0) {
+      parts.push(<Fragment key={key++}>{remaining.slice(0, next.i)}</Fragment>);
+    }
+    const matched = remaining.slice(next.i, next.i + next.p.length);
+    parts.push(<Accent key={key++}>{matched}</Accent>);
+    remaining = remaining.slice(next.i + next.p.length);
+  }
+
+  return <>{parts}</>;
+}
+
 export function Hero() {
   const reduce = useReducedMotion();
   const typed = useTypewriter(profile.name);
@@ -53,31 +86,6 @@ export function Hero() {
       id="inicio"
       className="relative mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-10"
     >
-      {/* Fondo nebuloso azul/morado del hero */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(60% 55% at 30% 38%, color-mix(in oklab, var(--nebula) 16%, transparent) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(45% 45% at 75% 20%, color-mix(in oklab, var(--violet) 12%, transparent) 0%, transparent 70%)",
-          }}
-        />
-        <div
-          className="absolute inset-x-0 bottom-0 h-40"
-          style={{
-            background:
-              "linear-gradient(to bottom, transparent, var(--bg))",
-          }}
-        />
-      </div>
-
       <div className="relative flex min-h-[100svh] max-w-3xl flex-col justify-center pt-20">
         <motion.div
           variants={container}
@@ -107,7 +115,7 @@ export function Hero() {
             variants={item}
             className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
           >
-            {profile.blurb}
+            <SplitByPhrases text={profile.blurb} />
           </motion.p>
 
           <motion.div variants={item} className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4">

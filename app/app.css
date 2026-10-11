@@ -20,6 +20,7 @@
   --violet: #9d7bf2;      /* acento principal: morado galáctico */
   --nova: #f0a93b;        /* contrapunto cálido: dorado estelar */
   --nebula: #7c86e8;      /* apoyo: índigo-nebulosa */
+  --ocean: #6b86f5;       /* azul oscuro: palabras acentuadas */
   --glass: rgba(5, 8, 26, 0.6);
 }
 
@@ -36,6 +37,7 @@
   --violet: #6b3ec8;      /* morado más profundo sobre claro */
   --nova: #c27c1d;        /* dorado más profundo sobre claro */
   --nebula: #5b63c9;
+  --ocean: #2746b8;       /* azul más profundo sobre claro */
   --glass: rgba(242, 241, 238, 0.72);
 }
 
@@ -54,6 +56,7 @@
   --color-violet: var(--violet);
   --color-nova: var(--nova);
   --color-nebula: var(--nebula);
+  --color-ocean: var(--ocean);
   --color-glass: var(--glass);
 
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
