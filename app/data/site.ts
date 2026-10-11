@@ -36,6 +36,14 @@ export const projects: Project[] = [
     year: "2025 – 2026",
   },
   {
+    title: "apprva — Aprobación y rechazo de documentos por flujos",
+    description:
+      "Web app para la aprobación y rechazo de documentos siguiendo tipos de flujos específicos. Se conecta vía API con scompras: cuando un documento necesita un proveedor en el ERP, extrae la información de la factura y la envía a apprva mediante un flujo de petición de creación de proveedor; también incluye un flujo para verificar si una factura tiene derecho a crédito fiscal. El panel de administrador permite invitar usuarios por Resend, asignar roles por flujo, y al primer inicio de sesión se registra un código QR en un autenticador para usar TOTP. Incluye sección de estadísticas con gráficos de documentos enviados, configuración de webhook para sistemas externos y documentación de la API. Seguridad con API key, HMAC, nonce y JWT.",
+    stack: ["React", ".NET", "MS SQL", "Resend", "TOTP", "Webhooks"],
+    visibility: "confidencial",
+    year: "2026",
+  },
+  {
     title: "Nombre del proyecto",
     description:
       "Describe el problema que resuelve y qué lo hace interesante. Una o dos frases con intención.",
