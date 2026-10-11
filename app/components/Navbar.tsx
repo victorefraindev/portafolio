@@ -112,7 +112,7 @@ function ThemeButton({
       type="button"
       onClick={toggle}
       aria-label={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-      className="flex h-10 w-10 items-center justify-center rounded-sm border border-line text-muted transition-colors hover:border-nova hover:text-nova"
+      className="flex h-10 w-10 items-center justify-center rounded-sm border border-line text-muted transition-colors hover:border-violet hover:text-violet"
     >
       {theme === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>

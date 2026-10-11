@@ -58,14 +58,14 @@ export function Hero() {
             href="#proyectos"
             className="group relative inline-flex items-center gap-2 text-base font-medium text-fg"
           >
-            <span className="border-b border-nova pb-0.5 transition-colors group-hover:border-transparent">
+            <span className="border-b border-violet pb-0.5 transition-colors group-hover:border-transparent">
               Ver proyectos
             </span>
             <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rotate-45 bg-nova" />
           </a>
           <a
             href={`mailto:${profile.email}`}
-            className="text-base text-muted transition-colors hover:text-nova"
+            className="text-base text-muted transition-colors hover:text-violet"
           >
             Escríbeme
           </a>

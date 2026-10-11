@@ -19,7 +19,7 @@ export function Skills() {
             <ul className="mt-6 space-y-3">
               {group.items.map((item) => (
                 <li key={item} className="flex items-baseline gap-3 text-muted">
-                  <span aria-hidden="true" className="h-1 w-3 shrink-0 translate-y-[-2px] bg-nova/70" />
+                  <span aria-hidden="true" className="h-1 w-3 shrink-0 translate-y-[-2px] bg-violet/70" />
                   {item}
                 </li>
               ))}

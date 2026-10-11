@@ -10,16 +10,17 @@
   color-scheme: dark;
 
   /* Paleta base */
-  --bg: #070a14;          /* obsidiana */
-  --bg-soft: #0b1120;     /* superficies alternas */
+  --bg: #05081a;          /* obsidiana azul profundo */
+  --bg-soft: #0a1026;     /* superficies alternas */
   --surface: rgba(233, 234, 243, 0.03);
   --fg: #e9eaf3;          /* blanco estelar */
   --muted: #c7cadb;       /* texto secundario */
-  --faint: #83889e;       /* texto atenuado */
+  --faint: #8a90a8;       /* texto atenuado */
   --line: rgba(233, 234, 243, 0.14);
-  --nova: #f0a93b;        /* acento único, dorado estelar */
-  --nebula: #7c86e8;      /* secundario, lavanda-índigo */
-  --glass: rgba(7, 10, 20, 0.55);
+  --violet: #9d7bf2;      /* acento principal: morado galáctico */
+  --nova: #f0a93b;        /* contrapunto cálido: dorado estelar */
+  --nebula: #7c86e8;      /* apoyo: índigo-nebulosa */
+  --glass: rgba(5, 8, 26, 0.6);
 }
 
 [data-theme="light"] {
@@ -32,9 +33,10 @@
   --muted: #3f4659;
   --faint: #6b7085;
   --line: rgba(16, 20, 31, 0.16);
+  --violet: #6b3ec8;      /* morado más profundo sobre claro */
   --nova: #c27c1d;        /* dorado más profundo sobre claro */
   --nebula: #5b63c9;
-  --glass: rgba(242, 241, 238, 0.7);
+  --glass: rgba(242, 241, 238, 0.72);
 }
 
 /* ============================================================
@@ -49,6 +51,7 @@
   --color-muted: var(--muted);
   --color-faint: var(--faint);
   --color-line: var(--line);
+  --color-violet: var(--violet);
   --color-nova: var(--nova);
   --color-nebula: var(--nebula);
   --color-glass: var(--glass);
@@ -84,7 +87,7 @@ body {
 }
 
 ::selection {
-  background: color-mix(in oklab, var(--nova) 30%, transparent);
+  background: color-mix(in oklab, var(--violet) 30%, transparent);
   color: var(--fg);
 }
 
@@ -96,7 +99,7 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--nova);
+  outline: 2px solid var(--violet);
   outline-offset: 3px;
   border-radius: 2px;
 }

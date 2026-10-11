@@ -28,22 +28,22 @@ type Palette = {
 function paletteFor(theme: "dark" | "light"): Palette {
   if (theme === "light") {
     return {
-      stars: ["#3f4659", "#5b63c9", "#c27c1d"],
-      starBase: 0.22,
+      stars: ["#3f4659", "#6b3ec8", "#5b63c9"],
+      starBase: 0.2,
       nebula: [
-        { x: 0.22, y: 0.18, radius: 0.45, color: "#5b63c9", alpha: 0.06, depth: 0.3 },
-        { x: 0.78, y: 0.6, radius: 0.5, color: "#c27c1d", alpha: 0.05, depth: 0.45 },
-        { x: 0.5, y: 0.9, radius: 0.55, color: "#7c86e8", alpha: 0.05, depth: 0.2 },
+        { x: 0.22, y: 0.18, radius: 0.45, color: "#6b3ec8", alpha: 0.05, depth: 0.3 },
+        { x: 0.78, y: 0.6, radius: 0.5, color: "#9d7bf2", alpha: 0.05, depth: 0.45 },
+        { x: 0.5, y: 0.9, radius: 0.55, color: "#5b63c9", alpha: 0.04, depth: 0.2 },
       ],
     };
   }
   return {
-    stars: ["#e9eaf3", "#f0a93b", "#7c86e8"],
+    stars: ["#e9eaf3", "#f0a93b", "#9d7bf2"],
     starBase: 0.5,
     nebula: [
-      { x: 0.18, y: 0.15, radius: 0.5, color: "#7c86e8", alpha: 0.12, depth: 0.3 },
-      { x: 0.8, y: 0.55, radius: 0.55, color: "#f0a93b", alpha: 0.07, depth: 0.45 },
-      { x: 0.45, y: 0.9, radius: 0.6, color: "#4752a8", alpha: 0.1, depth: 0.2 },
+      { x: 0.18, y: 0.15, radius: 0.5, color: "#9d7bf2", alpha: 0.13, depth: 0.3 },
+      { x: 0.8, y: 0.55, radius: 0.55, color: "#f0a93b", alpha: 0.06, depth: 0.45 },
+      { x: 0.45, y: 0.9, radius: 0.6, color: "#4855c0", alpha: 0.11, depth: 0.2 },
     ],
   };
 }

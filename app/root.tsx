@@ -86,7 +86,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
           <code>{stack}</code>
         </pre>
       )}
-      <a className="mt-8 inline-block text-nova underline underline-offset-4" href="/">
+      <a className="mt-8 inline-block text-violet underline underline-offset-4" href="/">
         Volver al inicio
       </a>
     </main>

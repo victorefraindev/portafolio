@@ -36,7 +36,7 @@ export function Contact() {
               className="group flex flex-col gap-1 py-6 transition-colors hover:bg-surface sm:flex-row sm:items-baseline sm:justify-between"
             >
               <span className="font-mono text-sm text-faint">{c.label}</span>
-              <span className="text-lg text-fg underline decoration-line underline-offset-4 transition-colors group-hover:text-nova group-hover:decoration-nova">
+              <span className="text-lg text-fg underline decoration-line underline-offset-4 transition-colors group-hover:text-violet group-hover:decoration-violet">
                 {c.value}
               </span>
             </a>

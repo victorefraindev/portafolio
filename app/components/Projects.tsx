@@ -35,7 +35,7 @@ export function Projects() {
                 href={p.demo}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-nova hover:decoration-nova"
+                className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
               >
                 Demo
               </a>
@@ -43,7 +43,7 @@ export function Projects() {
                 href={p.repo}
                 target="_blank"
                 rel="noreferrer"
-                className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-nova hover:decoration-nova"
+                className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
               >
                 Código
               </a>
