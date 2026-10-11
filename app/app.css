@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Tokens — tema galáctico
+   Por defecto: modo oscuro ("obsidiana")
+   ============================================================ */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Paleta base */
+  --bg: #070a14;          /* obsidiana */
+  --bg-soft: #0b1120;     /* superficies alternas */
+  --surface: rgba(233, 234, 243, 0.03);
+  --fg: #e9eaf3;          /* blanco estelar */
+  --muted: #c7cadb;       /* texto secundario */
+  --faint: #83889e;       /* texto atenuado */
+  --line: rgba(233, 234, 243, 0.14);
+  --nova: #f0a93b;        /* acento único, dorado estelar */
+  --nebula: #7c86e8;      /* secundario, lavanda-índigo */
+  --glass: rgba(7, 10, 20, 0.55);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: #f2f1ee;          /* papel frío */
+  --bg-soft: #e9e7e1;
+  --surface: rgba(16, 20, 31, 0.03);
+  --fg: #10141f;
+  --muted: #3f4659;
+  --faint: #6b7085;
+  --line: rgba(16, 20, 31, 0.16);
+  --nova: #c27c1d;        /* dorado más profundo sobre claro */
+  --nebula: #5b63c9;
+  --glass: rgba(242, 241, 238, 0.7);
+}
+
+/* ============================================================
+   Tailwind v4 — mapeo de tokens a utilidades
+   ============================================================ */
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-nova: var(--nova);
+  --color-nebula: var(--nebula);
+  --color-glass: var(--glass);
+
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--nova) 30%, transparent);
+  color: var(--fg);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--nova);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
