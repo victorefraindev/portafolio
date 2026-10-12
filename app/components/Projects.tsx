@@ -1,8 +1,6 @@
-import { useRef } from "react";
 import { projects } from "~/data/site";
 import type { Project } from "~/data/site";
 import { Pleiades } from "~/components/Pleiades";
-import { ConstellationLines } from "~/components/ConstellationLines";
 
 function ProjectCard({ project }: { project: Project }) {
   const confidential = project.visibility === "confidencial";
@@ -16,12 +14,8 @@ function ProjectCard({ project }: { project: Project }) {
       : "border-nova opacity-40 group-hover:opacity-100";
 
   return (
-    <article
-      data-project-card
-      className="group relative flex flex-col bg-bg p-8 transition-colors duration-300 hover:bg-surface md:p-10"
-    >
+    <article className="group relative flex flex-col bg-bg/75 p-8 backdrop-blur-md transition-colors duration-300 hover:bg-surface md:p-10">
       <span
-        data-project-star
         aria-hidden="true"
         className={`absolute right-6 top-6 inline-block h-2 w-2 rotate-45 border transition-opacity duration-300 ${diamondColor}`}
       />
@@ -98,8 +92,6 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export function Projects() {
-  const gridRef = useRef<HTMLDivElement>(null);
-
   return (
     <section id="proyectos" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-24 md:px-10 md:py-32">
       <div className="flex items-start justify-between gap-8">
@@ -126,8 +118,19 @@ export function Projects() {
         </div>
       </div>
 
-      <div ref={gridRef} className="relative mt-14">
-        <ConstellationLines containerRef={gridRef} />
+      <div className="relative mt-14">
+        {/* Constelación de fondo */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-visible"
+        >
+          <Pleiades
+            variant="background"
+            trigger="view"
+            className="h-auto w-[88%] max-w-[720px] opacity-50"
+          />
+        </div>
+
         <div className="relative grid gap-px border border-line bg-line sm:grid-cols-2">
           {projects.map((p) => (
             <ProjectCard key={p.title} project={p} />
