@@ -24,11 +24,6 @@ const channels: Channel[] = [
     href: profile.github,
     value: profile.github.replace("https://", ""),
   },
-  {
-    label: "LinkedIn",
-    href: profile.linkedin,
-    value: profile.linkedin.replace("https://", ""),
-  },
 ];
 
 export function Contact() {
