@@ -55,9 +55,10 @@ export function Pleiades({
 
   const isBg = variant === "background";
 
-  const lineColor = isBg ? "text-fg/25" : "text-violet/45";
-  const starColor = isBg ? "text-fg/40" : "text-fg";
-  const brightColor = isBg ? "text-fg/60" : "text-nova";
+  const lineColor = isBg ? "text-fg/40" : "text-violet/60";
+  const starColor = isBg ? "text-fg/75" : "text-fg";
+  const brightColor = "text-nova";
+  const glowColor = isBg ? "text-nova/30" : "text-nova/40";
 
   return (
     <motion.svg
@@ -77,13 +78,23 @@ export function Pleiades({
             d={`M ${s1.x} ${s1.y} L ${s2.x} ${s2.y}`}
             fill="none"
             stroke="currentColor"
-            strokeWidth={isBg ? 0.4 : 0.7}
+            strokeWidth={isBg ? 0.6 : 1}
             strokeLinecap="round"
             className={lineColor}
             variants={lineVariants}
           />
         );
       })}
+
+      {/* Halo de la estrella principal (Alcyone) — detrás de las estrellas */}
+      <motion.circle
+        cx={pleiadesById["alcyone"].x}
+        cy={pleiadesById["alcyone"].y}
+        r={pleiadesById["alcyone"].r * 3.2}
+        fill="currentColor"
+        className={glowColor}
+        variants={starVariants}
+      />
 
       {pleiadesStars.map((s) => (
         <motion.circle

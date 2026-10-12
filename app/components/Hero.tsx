@@ -96,7 +96,7 @@ export function Hero() {
       {/* Pléyades de fondo (detalle sutil) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute right-0 top-20 hidden w-40 opacity-60 md:block lg:right-10"
+        className="pointer-events-none absolute right-0 top-20 hidden w-48 opacity-90 md:block lg:right-10"
       >
         <Pleiades variant="background" trigger="mount" className="h-full w-full" />
       </div>

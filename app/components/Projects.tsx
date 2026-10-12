@@ -110,7 +110,7 @@ export function Projects() {
           <Pleiades
             variant="ornament"
             trigger="view"
-            className="h-28 w-28 text-fg"
+            className="h-32 w-32 text-fg"
           />
           <p className="mt-2 text-right font-mono text-xs text-faint">
             M45 · Pléyades
@@ -127,7 +127,7 @@ export function Projects() {
           <Pleiades
             variant="background"
             trigger="view"
-            className="h-auto w-[88%] max-w-[720px] opacity-50"
+            className="h-auto w-[88%] max-w-[720px] opacity-80"
           />
         </div>
 
