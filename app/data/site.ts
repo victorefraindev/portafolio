@@ -4,7 +4,7 @@ export const profile = {
   role: "Desarrollador Fullstack y DevOps",
   availability: "Disponible para nuevos proyectos",
   location: "Caracas, Venezuela",
-  email: "victorarmao16@gmail.com",
+  email: "victorefrain.dev@gmail.com",
   github: "https://github.com/victorefraindev",
   avatar: "/profile.png",
   blurb:
