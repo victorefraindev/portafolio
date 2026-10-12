@@ -1,5 +1,8 @@
+import { useRef } from "react";
 import { projects } from "~/data/site";
 import type { Project } from "~/data/site";
+import { Pleiades } from "~/components/Pleiades";
+import { ConstellationLines } from "~/components/ConstellationLines";
 
 function ProjectCard({ project }: { project: Project }) {
   const confidential = project.visibility === "confidencial";
@@ -13,8 +16,12 @@ function ProjectCard({ project }: { project: Project }) {
       : "border-nova opacity-40 group-hover:opacity-100";
 
   return (
-    <article className="group relative flex flex-col bg-bg p-8 transition-colors duration-300 hover:bg-surface md:p-10">
+    <article
+      data-project-card
+      className="group relative flex flex-col bg-bg p-8 transition-colors duration-300 hover:bg-surface md:p-10"
+    >
       <span
+        data-project-star
         aria-hidden="true"
         className={`absolute right-6 top-6 inline-block h-2 w-2 rotate-45 border transition-opacity duration-300 ${diamondColor}`}
       />
@@ -91,21 +98,41 @@ function ProjectCard({ project }: { project: Project }) {
 }
 
 export function Projects() {
+  const gridRef = useRef<HTMLDivElement>(null);
+
   return (
     <section id="proyectos" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-24 md:px-10 md:py-32">
-      <h2 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-        Proyectos
-      </h2>
-      <p className="mt-5 max-w-prose text-lg text-muted">
-        Una selección de trabajos, en orden inverso. Cada uno con su historia y
-        sus decisiones. Algunos son de empresa y se muestran sin detalles
-        sensibles.
-      </p>
+      <div className="flex items-start justify-between gap-8">
+        <div>
+          <h2 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
+            Proyectos
+          </h2>
+          <p className="mt-5 max-w-prose text-lg text-muted">
+            Una selección de trabajos, en orden inverso. Cada uno con su historia
+            y sus decisiones. Algunos son de empresa y se muestran sin detalles
+            sensibles.
+          </p>
+        </div>
 
-      <div className="mt-14 grid gap-px border border-line bg-line sm:grid-cols-2">
-        {projects.map((p) => (
-          <ProjectCard key={p.title} project={p} />
-        ))}
+        <div className="hidden shrink-0 md:block" aria-hidden="true">
+          <Pleiades
+            variant="ornament"
+            trigger="view"
+            className="h-28 w-28 text-fg"
+          />
+          <p className="mt-2 text-right font-mono text-xs text-faint">
+            M45 · Pléyades
+          </p>
+        </div>
+      </div>
+
+      <div ref={gridRef} className="relative mt-14">
+        <ConstellationLines containerRef={gridRef} />
+        <div className="relative grid gap-px border border-line bg-line sm:grid-cols-2">
+          {projects.map((p) => (
+            <ProjectCard key={p.title} project={p} />
+          ))}
+        </div>
       </div>
     </section>
   );

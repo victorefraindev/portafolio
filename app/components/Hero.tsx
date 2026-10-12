@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, Fragment } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import type { Transition, Variants } from "motion/react";
 import { profile } from "~/data/site";
+import { Pleiades } from "~/components/Pleiades";
 
 function useTypewriter(text: string, speed = 75) {
   const reduce = useReducedMotion();
@@ -92,6 +93,14 @@ export function Hero() {
       id="inicio"
       className="relative mx-auto max-w-6xl px-6 pb-24 pt-32 md:px-10"
     >
+      {/* Pléyades de fondo (detalle sutil) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-0 top-20 hidden w-40 opacity-60 md:block lg:right-10"
+      >
+        <Pleiades variant="background" trigger="mount" className="h-full w-full" />
+      </div>
+
       <div className="relative grid min-h-[100svh] items-center gap-12 pt-20 lg:grid-cols-[minmax(0,1fr)_300px] lg:gap-20">
         <motion.div
           variants={container}

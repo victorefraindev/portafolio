@@ -8,10 +8,10 @@ export const profile = {
   github: "https://github.com/victorefraindev",
   avatar: "/profile.png",
   blurb:
-    "Desarrollo aplicaciones de punta a punta y las despliego en producción. Me gusta escribir código limpio y mantener la infraestructura estable y observable.",
+    "Desarrollo aplicaciones de punta a punta y las despliego en producción. Me gusta bastante la programación y mantener la infraestructura estable y observable.",
   about: [
     "Soy desarrollador fullstack con trabajo de la interfaz al servidor: React, SvelteKit y Next.js en el frontend; NestJS, Go y .NET en el backend, con PostgreSQL y MS SQL debajo. Diseño, construyo y despliego aplicaciones web desde cero, y me interesa el ciclo completo: modelado de datos, APIs, pruebas y puesta en producción.",
-    "También administro la infraestructura que sostiene lo que construyo: servidores Linux (Ubuntu), contenedores con Docker y monitoreo con Grafana. Creo que un producto no está terminado cuando corre, sino cuando se puede observar y operar con confianza.",
+    "También administro la infraestructura que sostiene lo que construyo: servidores Linux (Ubuntu), contenedores con Docker y monitoreo con Grafana.",
   ],
 };
 
@@ -122,4 +122,4 @@ export const education = [
 ];
 
 export const contactNote =
-  "¿Un proyecto, una vacante, o solo saludar? Mi bandeja está abierta. Escríbeme y te respondo en un par de días.";
+  "Mi bandeja está abierta para cualquier proyecto. Escríbeme y te respondo.";
