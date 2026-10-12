@@ -3,15 +3,20 @@ import type { Project } from "~/data/site";
 
 function ProjectCard({ project }: { project: Project }) {
   const confidential = project.visibility === "confidencial";
+  const privado = project.visibility === "privado";
+  const hasLinks = !confidential && !privado;
+
+  const diamondColor = confidential
+    ? "border-ocean opacity-70 group-hover:opacity-100"
+    : privado
+      ? "border-violet opacity-70 group-hover:opacity-100"
+      : "border-nova opacity-40 group-hover:opacity-100";
+
   return (
     <article className="group relative flex flex-col bg-bg p-8 transition-colors duration-300 hover:bg-surface md:p-10">
       <span
         aria-hidden="true"
-        className={`absolute right-6 top-6 inline-block h-2 w-2 rotate-45 border transition-opacity duration-300 ${
-          confidential
-            ? "border-ocean opacity-70 group-hover:opacity-100"
-            : "border-nova opacity-40 group-hover:opacity-100"
-        }`}
+        className={`absolute right-6 top-6 inline-block h-2 w-2 rotate-45 border transition-opacity duration-300 ${diamondColor}`}
       />
       <h3 className="font-display text-2xl font-medium tracking-tight text-fg">
         {project.title}
@@ -33,7 +38,7 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       )}
 
-      {confidential ? (
+      {confidential && (
         <div className="mt-8">
           <p className="flex items-center gap-2 font-mono text-sm text-faint">
             <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rotate-45 bg-ocean" />
@@ -43,24 +48,42 @@ function ProjectCard({ project }: { project: Project }) {
             Detalles protegidos por NDA.
           </p>
         </div>
-      ) : (
+      )}
+
+      {privado && (
+        <div className="mt-8">
+          <p className="flex items-center gap-2 font-mono text-sm text-faint">
+            <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rotate-45 bg-violet" />
+            Proyecto personal
+          </p>
+          <p className="mt-3 text-sm text-faint">
+            Código en repositorio privado.
+          </p>
+        </div>
+      )}
+
+      {hasLinks && (
         <div className="mt-8 flex flex-wrap gap-6">
-          <a
-            href={project.demo}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
-          >
-            Demo
-          </a>
-          <a
-            href={project.repo}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
-          >
-            Código
-          </a>
+          {project.demo && (
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
+            >
+              Demo
+            </a>
+          )}
+          {project.repo && (
+            <a
+              href={project.repo}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm font-medium text-fg underline decoration-line underline-offset-4 transition-colors hover:text-violet hover:decoration-violet"
+            >
+              Código
+            </a>
+          )}
         </div>
       )}
     </article>

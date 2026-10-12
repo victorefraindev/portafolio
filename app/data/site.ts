@@ -5,7 +5,7 @@ export const profile = {
   availability: "Disponible para nuevos proyectos",
   location: "Caracas, Venezuela",
   email: "victorarmao16@gmail.com",
-  github: "https://github.com/tunombre",
+  github: "https://github.com/victorefraindev",
   linkedin: "https://www.linkedin.com/in/tunombre",
   avatar: "/profile.png",
   blurb:
@@ -20,7 +20,7 @@ export type Project = {
   title: string;
   description: string;
   stack: string[];
-  visibility: "publico" | "confidencial";
+  visibility: "publico" | "confidencial" | "privado";
   year?: string;
   infra?: string;
   demo?: string;
@@ -47,31 +47,21 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
-    title: "Nombre del proyecto",
+    title: "Yogures Cremosos — Tienda online de yogures artesanales",
     description:
-      "Describe el problema que resuelve y qué lo hace interesante. Una o dos frases con intención.",
-    stack: ["React", "NestJS", "PostgreSQL"],
+      "E-commerce de yogures artesanales dividido en tienda para clientes, panel de administración y API. La tienda (Next.js), el panel (SvelteKit) y la API (Go con Gin) sobre Supabase para auth, almacenamiento y base de datos. Autenticación JWT verificada contra JWKS, pedidos, productos, tasa BCV automática, rate limiting y headers de seguridad. Contrato OpenAPI documentado.",
+    stack: ["Go (Gin)", "Next.js", "SvelteKit", "Supabase", "PostgreSQL"],
     visibility: "publico",
-    demo: "https://ejemplo.dev",
-    repo: "https://github.com/tunombre/proyecto",
+    year: "2025 – 2026",
+    repo: "https://github.com/victorefraindev/yogures-backend",
   },
   {
-    title: "Otro proyecto",
+    title: "Sistema de Almacenamiento — Inventario y ventas para bodegas",
     description:
-      "Qué construiste, para quién, y qué aprendiste. Muestra decisiones, no solo resultados.",
-    stack: ["Go", "Docker", "Grafana"],
-    visibility: "publico",
-    demo: "https://ejemplo.dev",
-    repo: "https://github.com/tunombre/proyecto",
-  },
-  {
-    title: "Un experimento",
-    description:
-      "Un proyecto personal o de exploración. Aquí cabe lo raro, lo divertido o lo educativo.",
-    stack: ["SvelteKit", "TypeScript", "Vite"],
-    visibility: "publico",
-    demo: "https://ejemplo.dev",
-    repo: "https://github.com/tunombre/proyecto",
+      "App móvil (PWA) para gestionar el inventario y las ventas de bodegas pequeñas, con panel de administración de la plataforma. Mobile-first y offline: las ventas sin conexión se guardan en una cola local y se sincronizan al volver la señal. Multi-tenant por bodega con roles (admin/vendedor), catálogo con fotos, ventas con IVA, tasa BCV automática o manual, reportes y devoluciones que reponen stock. Backend NestJS con Prisma sobre Supabase (Postgres + Auth).",
+    stack: ["React (Vite)", "NestJS", "Prisma", "Supabase", "PostgreSQL", "PWA"],
+    visibility: "privado",
+    year: "2025 – 2026",
   },
 ];
 
@@ -90,7 +80,7 @@ export const skills = [
   },
   {
     group: "Bases de datos",
-    items: ["PostgreSQL", "MS SQL"],
+    items: ["PostgreSQL", "MS SQL", "Supabase", "Prisma"],
   },
   {
     group: "DevOps",
