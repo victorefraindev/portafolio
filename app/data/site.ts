@@ -49,7 +49,7 @@ export const projects: Project[] = [
   {
     title: "Yogures Cremosos — Tienda online de yogures artesanales",
     description:
-      "E-commerce de yogures artesanales dividido en tienda para clientes, panel de administración y API. La tienda (Next.js), el panel (SvelteKit) y la API (Go con Gin) sobre Supabase para auth, almacenamiento y base de datos. Autenticación JWT verificada contra JWKS, pedidos, productos, tasa BCV automática, rate limiting y headers de seguridad. Contrato OpenAPI documentado.",
+      "E-commerce de yogures artesanales dividido en tienda para clientes, panel de administración y API. La tienda (Next.js), el panel (SvelteKit) y la API (Go con Gin) sobre Supabase: Auth para el login, Storage para imágenes y Postgres como base de datos. Autenticación JWT verificada contra JWKS, pedidos, productos, tasa BCV automática, rate limiting y headers de seguridad. Contrato OpenAPI documentado.",
     stack: ["Go (Gin)", "Next.js", "SvelteKit", "Supabase", "PostgreSQL"],
     visibility: "publico",
     year: "2025 – 2026",
@@ -58,7 +58,7 @@ export const projects: Project[] = [
   {
     title: "Sistema de Almacenamiento — Inventario y ventas para bodegas",
     description:
-      "App móvil (PWA) para gestionar el inventario y las ventas de bodegas pequeñas, con panel de administración de la plataforma. Mobile-first y offline: las ventas sin conexión se guardan en una cola local y se sincronizan al volver la señal. Multi-tenant por bodega con roles (admin/vendedor), catálogo con fotos, ventas con IVA, tasa BCV automática o manual, reportes y devoluciones que reponen stock. Backend NestJS con Prisma sobre Supabase (Postgres + Auth).",
+      "App móvil (PWA) para gestionar el inventario y las ventas de bodegas pequeñas, con panel de administración de la plataforma. Mobile-first y offline: las ventas sin conexión se guardan en una cola local y se sincronizan al volver la señal. Multi-tenant por bodega con roles (admin/vendedor), catálogo con fotos, ventas con IVA, tasa BCV automática o manual, reportes y devoluciones que reponen stock. Backend NestJS con Prisma sobre Supabase: Postgres como base, Auth para las sesiones y Storage para las fotos de productos.",
     stack: ["React (Vite)", "NestJS", "Prisma", "Supabase", "PostgreSQL", "PWA"],
     visibility: "privado",
     year: "2025 – 2026",
@@ -80,7 +80,7 @@ export const skills = [
   },
   {
     group: "Bases de datos",
-    items: ["PostgreSQL", "MS SQL", "Supabase", "Prisma"],
+    items: ["PostgreSQL", "MS SQL", "Supabase Auth", "Supabase Storage", "Prisma"],
   },
   {
     group: "DevOps",

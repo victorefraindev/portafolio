@@ -34,6 +34,8 @@ const icons: Record<string, IconType> = {
   ".NET": SiDotnet,
   PostgreSQL: SiPostgresql,
   Supabase: SiSupabase,
+  "Supabase Auth": SiSupabase,
+  "Supabase Storage": SiSupabase,
   Prisma: SiPrisma,
   "MS SQL": DiMsqlServer,
   Docker: SiDocker,
