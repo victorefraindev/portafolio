@@ -21,6 +21,7 @@
   --nova: #f0a93b;        /* contrapunto cálido: dorado estelar */
   --nebula: #7c86e8;      /* apoyo: índigo-nebulosa */
   --ocean: #6b86f5;       /* azul oscuro: palabras acentuadas */
+  --danger: #f2726b;      /* errores */
   --glass: rgba(5, 8, 26, 0.6);
 }
 
@@ -38,6 +39,7 @@
   --nova: #c27c1d;        /* dorado más profundo sobre claro */
   --nebula: #5b63c9;
   --ocean: #2746b8;       /* azul más profundo sobre claro */
+  --danger: #c23f3f;      /* errores sobre claro */
   --glass: rgba(242, 241, 238, 0.72);
 }
 
@@ -57,6 +59,7 @@
   --color-nova: var(--nova);
   --color-nebula: var(--nebula);
   --color-ocean: var(--ocean);
+  --color-danger: var(--danger);
   --color-glass: var(--glass);
 
   --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;

@@ -139,7 +139,7 @@ export function Hero() {
               <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rotate-45 bg-nova" />
             </a>
             <a
-              href={`mailto:${profile.email}`}
+              href="#contacto"
               className="text-base text-muted transition-colors hover:text-violet"
             >
               Escríbeme
