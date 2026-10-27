@@ -6,13 +6,19 @@ export const profile = {
   location: "Caracas, Venezuela",
   email: "victorefrain.dev@gmail.com",
   github: "https://github.com/victorefraindev",
-  avatar: "/profile.png",
+  avatar: "/profile.jpeg",
   blurb:
     "Desarrollo aplicaciones de punta a punta y las despliego en producción. Me gusta bastante la programación y mantener la infraestructura estable y observable.",
   about: [
     "Soy desarrollador fullstack con trabajo de la interfaz al servidor: React, SvelteKit y Next.js en el frontend; NestJS, Go y .NET en el backend, con PostgreSQL y MS SQL debajo. Diseño, construyo y despliego aplicaciones web desde cero, y me interesa el ciclo completo: modelado de datos, APIs, pruebas y puesta en producción.",
     "También administro la infraestructura que sostiene lo que construyo: servidores Linux (Ubuntu), contenedores con Docker y monitoreo con Grafana.",
   ],
+};
+
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  portrait?: boolean;
 };
 
 export type Project = {
@@ -23,25 +29,27 @@ export type Project = {
   year?: string;
   infra?: string;
   demo?: string;
+  admin?: string;
   repo?: string;
+  images?: ProjectImage[];
 };
 
 export const projects: Project[] = [
   {
     title: "scompras — Carga y validación de documentos fiscales",
     description:
-      "Sistema desarrollado desde cero para cargar, validar y reportar documentos fiscales: facturas, retenciones de IVA e ISLR. El documento subido pasa por OCR en Power Automate, y luego Python con una IA (ChatGPT) ordena el texto extraído en campos estructurados dentro de la base de datos. Permite crear lotes, contrastar la información extraída contra la imagen del documento y generar reportes con montos, IVA, exento y productos. Desde una API se conecta con el ERP del cliente. Seguridad con JWT, HMAC y bcrypt.",
-    stack: ["React", ".NET 10", "MS SQL 2021", "Python", "Power Automate", "OpenAI"],
-    infra: "Despliegue en un servidor Ubuntu: base de datos y tablas configuradas, usuario de BD propio, Docker (con Dozzle para el estado de contenedores) y Vault para secretos. Observabilidad completa con Grafana, Prometheus (métricas) y Loki (logs), recolectados por Grafana Alloy. CI/CD con pruebas unitarias, integración por SSH con un usuario de permisos mínimos que solo ejecuta un script definido para montar y actualizar el sistema. Nginx para el frontend.",
+      "Plataforma para cargar, validar y reportar documentos fiscales: facturas, retenciones de IVA e ISLR. Diseñé y desarrollé el flujo completo: interfaz, API, extracción de datos con OCR e IA, contraste de la información contra la imagen original y generación de reportes con montos, IVA y productos. El sistema se integra con el ERP del cliente mediante una API.",
+    stack: ["React", ".NET", "SQL Server", "Python", "OCR", "IA"],
+    infra: "Me encargué de la infraestructura de punta a punta: preparación del servidor Ubuntu, despliegue con contenedores, automatización de CI/CD y monitoreo con métricas y logs. Detalles de arquitectura bajo solicitud.",
     visibility: "confidencial",
     year: "2025 – 2026",
   },
   {
-    title: "apprva — Aprobación y rechazo de documentos por flujos",
+    title: "Apprva — Aprobación y rechazo de documentos por flujos",
     description:
-      "Web app para la aprobación y rechazo de documentos siguiendo tipos de flujos específicos. Se conecta vía API con scompras: cuando un documento necesita un proveedor en el ERP, extrae la información de la factura y la envía a apprva mediante un flujo de petición de creación de proveedor; también incluye un flujo para verificar si una factura tiene derecho a crédito fiscal. El panel de administrador permite invitar usuarios por Resend, asignar roles por flujo, y al primer inicio de sesión se registra un código QR en un autenticador para usar TOTP. Incluye sección de estadísticas con gráficos de documentos enviados, configuración de webhook para sistemas externos y documentación de la API. Seguridad con API key, HMAC, nonce y JWT.",
-    stack: ["React", "NestJS", "PostgreSQL", "Resend", "TOTP", "Webhooks"],
-    infra: "Misma infraestructura que el resto de los servicios: servidor Ubuntu, Docker, Vault, y observabilidad con Grafana, Prometheus y Loki vía Grafana Alloy. CI/CD con pruebas unitarias e integración por SSH con usuario de permisos mínimos. Nginx para el frontend.",
+      "Web app para la aprobación y rechazo de documentos siguiendo flujos configurables. Diseñé y desarrollé la interfaz, la API y el modelo de permisos: creación de flujos, asignación de roles, invitación de usuarios, autenticación en dos pasos, estadísticas de documentos, webhooks para sistemas externos y documentación de la API. Se integra con un sistema de gestión documental para intercambiar información de facturas y proveedores.",
+    stack: ["React", "NestJS", "PostgreSQL", "Webhooks"],
+    infra: "Me encargué del despliegue y la operación: servidor Ubuntu, contenedores, CI/CD y monitoreo con métricas y logs. Detalles de arquitectura bajo solicitud.",
     visibility: "confidencial",
     year: "2026",
   },
@@ -51,16 +59,39 @@ export const projects: Project[] = [
       "E-commerce de yogures artesanales dividido en tienda para clientes, panel de administración y API. La tienda (Next.js), el panel (SvelteKit) y la API (Go con Gin) sobre Supabase: Auth para el login, Storage para imágenes y Postgres como base de datos. Autenticación JWT verificada contra JWKS, pedidos, productos, tasa BCV automática, rate limiting y headers de seguridad. Contrato OpenAPI documentado.",
     stack: ["Go (Gin)", "Next.js", "SvelteKit", "Supabase", "PostgreSQL"],
     visibility: "publico",
-    year: "2025 – 2026",
+    year: "2026",
+    demo: "https://yogures-frontend-clientes.vercel.app",
+    admin: "https://yogures-frontend-admin.vercel.app/admin",
     repo: "https://github.com/victorefraindev/yogures-backend",
+    images: [
+      {
+        src: "/proyecto-yogurt.png",
+        alt: "Tienda de Yogures Cremosos: portada con el yogur destacado y el precio.",
+      },
+      {
+        src: "/yogures-frontend.admin.png",
+        alt: "Panel de administración de Yogures Cremosos con métricas de pedidos e ingresos.",
+      },
+    ],
   },
   {
-    title: "Sistema de Almacenamiento — Inventario y ventas para bodegas",
+    title: "Sistema de Inventario — Ventas y control de stock para bodegas",
     description:
       "App móvil (PWA) para gestionar el inventario y las ventas de bodegas pequeñas, con panel de administración de la plataforma. Mobile-first y offline: las ventas sin conexión se guardan en una cola local y se sincronizan al volver la señal. Multi-tenant por bodega con roles (admin/vendedor), catálogo con fotos, ventas con IVA, tasa BCV automática o manual, reportes y devoluciones que reponen stock. Backend NestJS con Prisma sobre Supabase: Postgres como base, Auth para las sesiones y Storage para las fotos de productos.",
     stack: ["React (Vite)", "NestJS", "Prisma", "Supabase", "PostgreSQL", "PWA"],
     visibility: "privado",
-    year: "2025 – 2026",
+    year: "2026",
+    images: [
+      {
+        src: "/sistema-inventario-desktop.png",
+        alt: "Panel de inventario en escritorio: ventas del día, tasa vigente, stock bajo y últimos movimientos.",
+      },
+      {
+        src: "/sistema-inventario-phone.png",
+        alt: "Vista móvil del inventario: ventas del día, tasa vigente, stock bajo y movimientos.",
+        portrait: true,
+      },
+    ],
   },
 ];
 

@@ -180,9 +180,9 @@ function Channels() {
         <li key={c.label} className="border-t border-line first:border-t-0">
           <a
             href={c.href}
-            download={c.download ?? undefined}
-            target={c.href.startsWith("mailto:") ? undefined : "_blank"}
-            rel={c.href.startsWith("mailto:") ? undefined : "noreferrer"}
+            download={c.download ? "" : undefined}
+            target={c.href.startsWith("mailto:") || c.download ? undefined : "_blank"}
+            rel={c.href.startsWith("mailto:") || c.download ? undefined : "noreferrer"}
             className="group flex flex-col gap-1 py-5 transition-colors"
           >
             <span className="font-mono text-sm text-faint">{c.label}</span>
