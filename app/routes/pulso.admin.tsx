@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import type { Route } from "./+types/pulso.admin";
 import { useCatalog, useOrder } from "~/demos/pulso/store";
@@ -8,6 +9,8 @@ import { CategoriesPanel } from "~/demos/pulso/CategoriesPanel";
 import { StatsPanel } from "~/demos/pulso/StatsPanel";
 import { ActivityPanel } from "~/demos/pulso/ActivityPanel";
 import { UsersPanel } from "~/demos/pulso/UsersPanel";
+import { ConfirmDialog } from "~/demos/pulso/ConfirmDialog";
+import { ToastProvider, useToast } from "~/demos/pulso/toast";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -40,6 +43,16 @@ const tabs: Array<{ id: Tab; label: string }> = [
 ];
 
 export default function PulsoAdmin() {
+  return (
+    <div className="pl-admin flex min-h-screen flex-col lg:flex-row">
+      <ToastProvider>
+        <AdminShell />
+      </ToastProvider>
+    </div>
+  );
+}
+
+function AdminShell() {
   const [searchParams, setSearchParams] = useSearchParams();
   const requested = searchParams.get("tab");
   const tab: Tab = tabs.some((item) => item.id === requested)
@@ -47,25 +60,23 @@ export default function PulsoAdmin() {
     : "resumen";
   const { products, resetCatalog } = useCatalog();
   const { resetOrder } = useOrder();
+  const { notify } = useToast();
+  const [resetOpen, setResetOpen] = useState(false);
 
   function setTab(next: Tab) {
     setSearchParams(next === "resumen" ? {} : { tab: next }, { replace: true });
   }
 
   function resetDemo() {
-    if (
-      window.confirm(
-        "¿Restablecer productos, categorías, portada, historial y pedido a los datos de ejemplo?",
-      )
-    ) {
-      resetCatalog();
-      resetOrder();
-      setTab("resumen");
-    }
+    resetCatalog();
+    resetOrder();
+    setTab("resumen");
+    setResetOpen(false);
+    notify("Demo restablecida con los datos de ejemplo.");
   }
 
   return (
-    <div className="pl-admin flex min-h-screen flex-col lg:flex-row">
+    <>
       <aside className="pl-admin-sidebar flex shrink-0 flex-col lg:min-h-screen lg:w-60">
         <div className="border-b border-[var(--pa-sidebar-line)] px-5 py-4">
           <p className="pl-admin-display text-[24px] text-white">
@@ -102,7 +113,7 @@ export default function PulsoAdmin() {
         <div className="mt-auto hidden border-t border-[var(--pa-sidebar-line)] p-4 lg:block">
           <button
             type="button"
-            onClick={resetDemo}
+            onClick={() => setResetOpen(true)}
             className="flex items-center gap-2 text-left text-[12px] text-white/40 transition-colors hover:text-[#5cf2c0]"
           >
             Restablecer demo
@@ -130,7 +141,7 @@ export default function PulsoAdmin() {
             </Link>
             <button
               type="button"
-              onClick={resetDemo}
+              onClick={() => setResetOpen(true)}
               className="pl-admin-btn lg:hidden"
             >
               Restablecer
@@ -150,6 +161,15 @@ export default function PulsoAdmin() {
           {tab === "usuarios" ? <UsersPanel /> : null}
         </main>
       </div>
-    </div>
+
+      <ConfirmDialog
+        open={resetOpen}
+        title="Restablecer la demo"
+        description="Se vuelven a los productos, categorías, portada, historial y pedido de ejemplo. Los cambios que hiciste en este navegador se pierden."
+        confirmLabel="Restablecer"
+        onCancel={() => setResetOpen(false)}
+        onConfirm={resetDemo}
+      />
+    </>
   );
 }

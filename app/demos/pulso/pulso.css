@@ -453,6 +453,116 @@
   color: var(--pa-muted);
 }
 
+.pl-admin .pl-admin-btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px solid var(--pa-bad);
+  background: var(--pa-bad);
+  padding: 0.5rem 0.8rem;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.pl-admin .pl-admin-btn-danger:hover {
+  background: #8c1b16;
+}
+
+.pl-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(10, 12, 14, 0.55);
+}
+
+.pl-dialog {
+  width: 100%;
+  max-width: 26rem;
+  border: 1px solid var(--pa-line);
+  background: var(--pa-surface);
+  padding: 1.25rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  animation: pl-dialog-in 0.16s ease-out;
+}
+
+.pl-toasts {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.pl-toast {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 22rem;
+  border-left: 3px solid #5cf2c0;
+  background: var(--pa-ink);
+  padding: 0.6rem 0.85rem;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  animation: pl-toast-in 0.18s ease-out;
+}
+
+.pl-toast-error {
+  border-left-color: #ff7a72;
+}
+
+.pl-toast-mark {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 999px;
+  background: #5cf2c0;
+}
+
+.pl-toast-error .pl-toast-mark {
+  background: #ff7a72;
+}
+
+@keyframes pl-dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pl-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-dialog,
+  .pl-toast {
+    animation: none;
+  }
+}
+
 .pl-admin .pl-admin-tab {
   border-bottom: 2px solid transparent;
   padding: 0.65rem 0.25rem;

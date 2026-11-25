@@ -2,9 +2,11 @@ import { useState } from "react";
 import { useCatalog } from "./store";
 import { ProductArt } from "./ProductArt";
 import { ArrowIcon } from "./Icons";
+import { useToast } from "./toast";
 
 export function PortadaPanel() {
   const { products, categories, siteConfig, updateSiteConfig } = useCatalog();
+  const { notify } = useToast();
   const [eyebrow, setEyebrow] = useState(siteConfig.heroEyebrow);
   const [titleStart, setTitleStart] = useState(siteConfig.heroTitleStart);
   const [titleAccent, setTitleAccent] = useState(siteConfig.heroTitleAccent);
@@ -15,7 +17,6 @@ export function PortadaPanel() {
     siteConfig.featuredIds[1] ?? "",
     siteConfig.featuredIds[2] ?? "",
   ]);
-  const [saved, setSaved] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const orderedCategories = [
@@ -37,7 +38,7 @@ export function PortadaPanel() {
   );
 
   function touch() {
-    setSaved(false);
+    setError(null);
   }
 
   function setFeaturedAt(index: number, value: string) {
@@ -66,7 +67,7 @@ export function PortadaPanel() {
       heroDescription: description.trim(),
       featuredIds: featuredIds.filter(Boolean),
     });
-    setSaved(true);
+    notify("Portada guardada. Ya se ve en la tienda.");
   }
 
   function moveCategory(id: string, direction: -1 | 1) {
@@ -107,11 +108,6 @@ export function PortadaPanel() {
       {error ? (
         <p className="mt-3 border border-[var(--pa-bad)]/30 bg-[var(--pa-bad-soft)] px-3 py-2 text-[12px] text-[var(--pa-bad)]">
           {error}
-        </p>
-      ) : null}
-      {saved ? (
-        <p className="mt-3 border border-[var(--pa-accent)]/25 bg-[var(--pa-accent-soft)] px-3 py-2 text-[12px] text-[var(--pa-accent)]">
-          Portada guardada. Ya se ve en la tienda.
         </p>
       ) : null}
 

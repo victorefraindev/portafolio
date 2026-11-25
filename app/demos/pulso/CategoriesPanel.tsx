@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useCatalog } from "./store";
+import { ConfirmDialog } from "./ConfirmDialog";
+import { useToast } from "./toast";
 
 export function CategoriesPanel() {
   const {
@@ -9,11 +11,12 @@ export function CategoriesPanel() {
     updateCategory,
     deleteCategory,
   } = useCatalog();
+  const { notify } = useToast();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [editingId, setEditingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [notice, setNotice] = useState<string | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   function resetForm() {
     setName("");
@@ -28,13 +31,11 @@ export function CategoriesPanel() {
     setName(category.name);
     setDescription(category.description);
     setError(null);
-    setNotice(null);
   }
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError(null);
-    setNotice(null);
     const message = editingId
       ? updateCategory(editingId, name, description)
       : addCategory(name, description);
@@ -42,8 +43,20 @@ export function CategoriesPanel() {
       setError(message);
       return;
     }
-    setNotice(editingId ? "Categoría actualizada." : "Categoría creada.");
+    notify(editingId ? "Categoría actualizada." : "Categoría creada.");
     resetForm();
+  }
+
+  function confirmDelete() {
+    if (!deleteTarget) return;
+    const message = deleteCategory(deleteTarget);
+    setDeleteTarget(null);
+    if (message) {
+      setError(message);
+      notify(message, "error");
+      return;
+    }
+    notify("Categoría eliminada.");
   }
 
   return (
@@ -99,11 +112,6 @@ export function CategoriesPanel() {
             {error}
           </p>
         ) : null}
-        {notice ? (
-          <p className="mt-3 border border-[var(--pa-accent)]/25 bg-[var(--pa-accent-soft)] px-3 py-2 text-[12px] text-[var(--pa-accent)]">
-            {notice}
-          </p>
-        ) : null}
       </form>
 
       <div className="mt-4 overflow-x-auto border border-[var(--pa-line)] bg-[var(--pa-surface)]">
@@ -144,19 +152,7 @@ export function CategoriesPanel() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => {
-                          if (
-                            window.confirm(
-                              `¿Eliminar la categoría "${category.name}"?`,
-                            )
-                          ) {
-                            const message = deleteCategory(category.id);
-                            if (message) {
-                              setError(message);
-                              setNotice(null);
-                            }
-                          }
-                        }}
+                        onClick={() => setDeleteTarget(category.id)}
                         className="pl-admin-btn text-[var(--pa-bad)]"
                       >
                         Eliminar
@@ -169,6 +165,15 @@ export function CategoriesPanel() {
           </tbody>
         </table>
       </div>
+
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title="Eliminar categoría"
+        description="Solo se puede eliminar una categoría sin productos. Si tiene productos, primero muévelos a otra categoría."
+        confirmLabel="Eliminar"
+        onCancel={() => setDeleteTarget(null)}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 }

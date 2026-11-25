@@ -4,13 +4,15 @@ import { useCatalog } from "./store";
 import { formatPrice } from "./utils";
 import { ProductArt } from "./ProductArt";
 import { ProductForm } from "./ProductForm";
+import { ConfirmDialog } from "./ConfirmDialog";
+import { useToast } from "./toast";
 import { PlusIcon } from "./Icons";
 
-const statusClass: Record<ProductStatus, string> = {
-  activo: "pl-badge pl-badge-good",
-  agotado: "pl-badge pl-badge-warn",
-  oculto: "pl-badge pl-badge-muted",
-};
+const statusOptions: Array<{ value: ProductStatus; label: string }> = [
+  { value: "activo", label: "Activo" },
+  { value: "agotado", label: "Agotado" },
+  { value: "oculto", label: "Oculto" },
+];
 
 export function ProductsPanel() {
   const {
@@ -22,11 +24,13 @@ export function ProductsPanel() {
     setProductStatus,
     toggleFeatured,
   } = useCatalog();
+  const { notify } = useToast();
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState<Product | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<Product | null>(null);
 
   const categoryById = new Map(categories.map((category) => [category.id, category]));
   const term = search.trim().toLowerCase();
@@ -49,6 +53,21 @@ export function ProductsPanel() {
   function openEdit(product: Product) {
     setEditing(product);
     setFormOpen(true);
+  }
+
+  function changeStatus(product: Product, status: ProductStatus) {
+    if (product.status === status) return;
+    setProductStatus(product.id, status);
+    notify(
+      `${product.name}: ${statusOptions.find((item) => item.value === status)?.label.toLowerCase()}.`,
+    );
+  }
+
+  function confirmDelete() {
+    if (!deleteTarget) return;
+    deleteProduct(deleteTarget.id);
+    notify(`"${deleteTarget.name}" eliminado del catálogo.`);
+    setDeleteTarget(null);
   }
 
   return (
@@ -102,7 +121,7 @@ export function ProductsPanel() {
       </div>
 
       <div className="mt-4 overflow-x-auto border border-[var(--pa-line)] bg-[var(--pa-surface)]">
-        <table className="pl-admin-table min-w-[860px]">
+        <table className="pl-admin-table min-w-[900px]">
           <thead>
             <tr>
               <th>Producto</th>
@@ -136,9 +155,30 @@ export function ProductsPanel() {
                   {formatPrice(product.price)}
                 </td>
                 <td>
-                  <span className={statusClass[product.status]}>
-                    {product.status}
-                  </span>
+                  <div
+                    className="inline-flex border border-[var(--pa-line-strong)]"
+                    role="group"
+                    aria-label={`Estado de ${product.name}`}
+                  >
+                    {statusOptions.map((option) => {
+                      const active = product.status === option.value;
+                      return (
+                        <button
+                          key={option.value}
+                          type="button"
+                          onClick={() => changeStatus(product, option.value)}
+                          aria-pressed={active}
+                          className={`px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.06em] transition-colors ${
+                            active
+                              ? "bg-[var(--pa-ink)] text-white"
+                              : "text-[var(--pa-muted)] hover:bg-[var(--pa-canvas)] hover:text-[var(--pa-ink)]"
+                          }`}
+                        >
+                          {option.label}
+                        </button>
+                      );
+                    })}
+                  </div>
                 </td>
                 <td>
                   <button
@@ -167,32 +207,9 @@ export function ProductsPanel() {
                     >
                       Editar
                     </button>
-                    <select
-                      value={product.status}
-                      onChange={(event) =>
-                        setProductStatus(
-                          product.id,
-                          event.target.value as ProductStatus,
-                        )
-                      }
-                      className="pl-admin-select !w-auto !py-1.5 text-[12px]"
-                      aria-label={`Estado de ${product.name}`}
-                    >
-                      <option value="activo">Activo</option>
-                      <option value="agotado">Agotado</option>
-                      <option value="oculto">Oculto</option>
-                    </select>
                     <button
                       type="button"
-                      onClick={() => {
-                        if (
-                          window.confirm(
-                            `¿Eliminar "${product.name}" del catálogo?`,
-                          )
-                        ) {
-                          deleteProduct(product.id);
-                        }
-                      }}
+                      onClick={() => setDeleteTarget(product)}
                       className="pl-admin-btn text-[var(--pa-bad)]"
                     >
                       Eliminar
@@ -218,13 +235,24 @@ export function ProductsPanel() {
           onSave={(input) => {
             if (editing) {
               updateProduct(editing.id, input);
+              notify(`"${input.name}" actualizado.`);
             } else {
               addProduct(input);
+              notify(`"${input.name}" agregado al catálogo.`);
             }
             setFormOpen(false);
           }}
         />
       ) : null}
+
+      <ConfirmDialog
+        open={Boolean(deleteTarget)}
+        title={`¿Eliminar "${deleteTarget?.name ?? ""}"?`}
+        description="Se quita del catálogo y de la tienda. Esta acción no se puede deshacer."
+        confirmLabel="Eliminar"
+        onCancel={() => setDeleteTarget(null)}
+        onConfirm={confirmDelete}
+      />
     </div>
   );
 }

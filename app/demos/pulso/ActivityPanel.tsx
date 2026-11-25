@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { useCatalog } from "./store";
 import { ActivityList } from "./ActivityList";
+import { ConfirmDialog } from "./ConfirmDialog";
+import { useToast } from "./toast";
 
 type Filter = "todas" | "producto" | "categoria" | "portada" | "demo";
 
 export function ActivityPanel() {
   const { activity, clearActivity } = useCatalog();
+  const { notify } = useToast();
   const [filter, setFilter] = useState<Filter>("todas");
   const [search, setSearch] = useState("");
+  const [clearOpen, setClearOpen] = useState(false);
 
   const term = search.trim().toLowerCase();
   const filtered = activity.filter((entry) => {
@@ -45,11 +49,7 @@ export function ActivityPanel() {
         </div>
         <button
           type="button"
-          onClick={() => {
-            if (window.confirm("¿Limpiar todo el historial de actividad?")) {
-              clearActivity();
-            }
-          }}
+          onClick={() => setClearOpen(true)}
           className="pl-admin-btn text-[var(--pa-bad)]"
         >
           Limpiar historial
@@ -135,6 +135,19 @@ export function ActivityPanel() {
           </p>
         </div>
       </div>
+
+      <ConfirmDialog
+        open={clearOpen}
+        title="Limpiar el historial"
+        description="Se borran todos los eventos registrados en este navegador. Los productos, categorías y la portada no cambian."
+        confirmLabel="Limpiar"
+        onCancel={() => setClearOpen(false)}
+        onConfirm={() => {
+          clearActivity();
+          setClearOpen(false);
+          notify("Historial de actividad limpio.");
+        }}
+      />
     </div>
   );
 }

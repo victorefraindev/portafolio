@@ -333,6 +333,7 @@ export const business = {
       excludes:
         "No incluye: comisiones de la pasarela ni trámites de cuenta comercial.",
       demo: "https://yogures-frontend-clientes.vercel.app",
+      admin: "https://yogures-frontend-admin.vercel.app/admin/login",
     },
   ] as BusinessPlan[],
   demos: [
