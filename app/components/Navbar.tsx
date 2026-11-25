@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { useTheme } from "~/hooks/useTheme";
 import { profile } from "~/data/site";
 
-const links = [
+type NavbarProps = {
+  variant?: "personal" | "business";
+};
+
+const personalLinks = [
   { href: "#sobre-mi", label: "Sobre mí" },
   { href: "#proyectos", label: "Proyectos" },
   { href: "#habilidades", label: "Habilidades" },
@@ -10,10 +15,20 @@ const links = [
   { href: "#contacto", label: "Contacto" },
 ];
 
-export function Navbar() {
+const businessLinks = [
+  { href: "#planes", label: "Planes" },
+  { href: "#demos", label: "Demos" },
+  { href: "#casos", label: "Casos" },
+  { href: "#proceso", label: "Proceso" },
+  { href: "#contacto", label: "Contacto" },
+];
+
+export function Navbar({ variant = "personal" }: NavbarProps) {
   const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const isBusiness = variant === "business";
+  const links = isBusiness ? businessLinks : personalLinks;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -29,15 +44,25 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6 md:px-10">
-        <a
-          href="#inicio"
-          className="font-display text-base font-semibold tracking-tight text-fg sm:text-lg"
-          onClick={() => setOpen(false)}
-        >
-          {profile.name}
-        </a>
+        {isBusiness ? (
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className="font-display text-base font-semibold tracking-tight text-fg sm:text-lg"
+          >
+            {profile.name}
+          </Link>
+        ) : (
+          <a
+            href="#inicio"
+            onClick={() => setOpen(false)}
+            className="font-display text-base font-semibold tracking-tight text-fg sm:text-lg"
+          >
+            {profile.name}
+          </a>
+        )}
 
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center gap-4 md:flex lg:gap-7">
           {links.map((l) => (
             <a
               key={l.href}
@@ -47,6 +72,18 @@ export function Navbar() {
               {l.label}
             </a>
           ))}
+          {!isBusiness && (
+            <Link
+              to="/servicios"
+              className="flex items-center gap-2 text-sm font-medium text-violet transition-colors hover:text-fg"
+            >
+              <span
+                aria-hidden="true"
+                className="inline-block h-1.5 w-1.5 rotate-45 bg-nova"
+              />
+              Negocios
+            </Link>
+          )}
           <ThemeButton theme={theme} toggle={toggle} />
         </div>
 
@@ -93,6 +130,23 @@ export function Navbar() {
                 {l.label}
               </a>
             ))}
+            {isBusiness ? (
+              <Link
+                to="/"
+                onClick={() => setOpen(false)}
+                className="py-2 text-base text-muted transition-colors hover:text-fg"
+              >
+                Ver portafolio técnico
+              </Link>
+            ) : (
+              <Link
+                to="/servicios"
+                onClick={() => setOpen(false)}
+                className="py-2 text-base font-medium text-violet transition-colors hover:text-fg"
+              >
+                Para negocios
+              </Link>
+            )}
           </div>
         </div>
       )}

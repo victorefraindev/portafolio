@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { contactNote, profile } from "~/data/site";
+import { business, contactNote, profile } from "~/data/site";
 
 const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID as string | undefined;
+
+type ContactVariant = "personal" | "business";
 
 type Channel = {
   label: string;
@@ -10,7 +12,7 @@ type Channel = {
   download?: boolean;
 };
 
-const channels: Channel[] = [
+const personalChannels: Channel[] = [
   {
     label: "Currículum",
     href: "/curriculum.pdf",
@@ -29,21 +31,40 @@ const channels: Channel[] = [
   },
 ];
 
+const businessChannels: Channel[] = [
+  {
+    label: "Correo",
+    href: `mailto:${profile.email}?subject=${encodeURIComponent(business.contact.emailSubject)}`,
+    value: profile.email,
+  },
+];
+
+const SECTION_CLASS =
+  "relative mx-auto max-w-6xl scroll-mt-24 px-6 py-24 md:px-10 md:py-32";
+
 type Status = "idle" | "sending" | "success" | "error";
 
-export function Contact() {
+export function Contact({
+  variant = "personal",
+}: {
+  variant?: ContactVariant;
+}) {
+  const isBusiness = variant === "business";
+  const channels = isBusiness ? businessChannels : personalChannels;
+  const title = isBusiness ? business.contact.title : "Contacto";
+  const note = isBusiness ? business.contact.note : contactNote;
   const [status, setStatus] = useState<Status>("idle");
 
   if (!FORMSPREE_ID) {
     // Sin configuración: mostramos solo los canales, sin formulario.
     return (
-      <section id="contacto" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-24 md:px-10 md:py-32">
+      <section id="contacto" className={SECTION_CLASS}>
         <h2 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-          Contacto
+          {title}
         </h2>
-        <p className="mt-5 max-w-prose text-lg text-muted">{contactNote}</p>
+        <p className="mt-5 max-w-prose text-lg text-muted">{note}</p>
         <div className="mt-12 max-w-2xl">
-          <Channels />
+          <Channels channels={channels} />
         </div>
       </section>
     );
@@ -75,17 +96,17 @@ export function Contact() {
   }
 
   return (
-    <section id="contacto" className="relative mx-auto max-w-6xl scroll-mt-24 px-6 py-24 md:px-10 md:py-32">
+    <section id="contacto" className={SECTION_CLASS}>
       <h2 className="font-display text-3xl font-semibold tracking-tight text-fg md:text-4xl">
-        Contacto
+        {title}
       </h2>
-      <p className="mt-5 max-w-prose text-lg text-muted">{contactNote}</p>
+      <p className="mt-5 max-w-prose text-lg text-muted">{note}</p>
 
       <div className="mt-14 grid items-start gap-12 md:grid-cols-2 md:gap-16">
         {/* Columna izquierda: formulario */}
         <div>
           <h3 className="font-display text-lg font-medium tracking-tight text-fg">
-            Envíame un mensaje
+            {isBusiness ? "Cuéntame de tu proyecto" : "Envíame un mensaje"}
           </h3>
 
           <form
@@ -123,6 +144,31 @@ export function Contact() {
                 />
               </div>
 
+              {isBusiness && (
+                <div>
+                  <label htmlFor="contact-type" className="font-mono text-sm text-faint">
+                    ¿Qué necesitas?
+                  </label>
+                  <select
+                    id="contact-type"
+                    name="tipo"
+                    required
+                    defaultValue=""
+                    className="mt-2 w-full border-b border-line bg-transparent px-0 py-2 text-fg outline-none transition-colors focus:border-violet"
+                  >
+                    <option value="" disabled>
+                      Selecciona una opción
+                    </option>
+                    <option>Landing page</option>
+                    <option>Sitio institucional</option>
+                    <option>Catálogo con panel</option>
+                    <option>Tienda online con pagos</option>
+                    <option>Mantenimiento</option>
+                    <option>No estoy seguro</option>
+                  </select>
+                </div>
+              )}
+
               <div>
                 <label htmlFor="contact-message" className="font-mono text-sm text-faint">
                   Mensaje
@@ -133,7 +179,11 @@ export function Contact() {
                   rows={5}
                   required
                   className="mt-2 w-full resize-y border border-line bg-transparent px-3 py-2 text-fg placeholder-faint outline-none transition-colors focus:border-violet"
-                  placeholder="Cuéntame de tu proyecto o propuesta…"
+                  placeholder={
+                    isBusiness
+                      ? "Cuéntame qué vende tu negocio y qué necesitas…"
+                      : "Cuéntame de tu proyecto o propuesta…"
+                  }
                 />
               </div>
             </div>
@@ -149,7 +199,9 @@ export function Contact() {
 
               {status === "success" && (
                 <p className="text-sm text-fg" role="status">
-                  ✓ Mensaje enviado. Te respondo en un par de días.
+                  {isBusiness
+                    ? "✓ Mensaje enviado. Te respondo con una propuesta."
+                    : "✓ Mensaje enviado. Te respondo en un par de días."}
                 </p>
               )}
               {status === "error" && (
@@ -164,16 +216,35 @@ export function Contact() {
         {/* Columna derecha: canales */}
         <div>
           <h3 className="font-display text-lg font-medium tracking-tight text-fg">
-            Canales directos
+            {isBusiness ? "Escríbeme directo" : "Canales directos"}
           </h3>
-          <Channels />
+          <Channels channels={channels} />
+
+          {isBusiness && (
+            <div className="mt-10 border-t border-line pt-6">
+              <p className="font-mono text-sm text-faint">Qué pasa después</p>
+              <ol className="mt-4 space-y-3">
+                {business.contact.nextSteps.map((step, index) => (
+                  <li
+                    key={step}
+                    className="flex gap-3 text-sm leading-relaxed text-muted"
+                  >
+                    <span className="font-mono text-faint">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </div>
       </div>
     </section>
   );
 }
 
-function Channels() {
+function Channels({ channels }: { channels: Channel[] }) {
   return (
     <ul className="mt-6">
       {channels.map((c) => (

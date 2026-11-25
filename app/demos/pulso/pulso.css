@@ -1,0 +1,475 @@
+/* ============================================================
+   Pulso Gamer — catálogo + panel.
+   Storefront de papel neutro con header y hero oscuro;
+   panel claro con sidebar oscuro. Todo bajo .pl-store / .pl-admin.
+   Regla de color: azul para acciones y datos sobre superficies
+   claras; el verde menta vive solo en las superficies oscuras
+   (hero, header, footer, marca) y en detalles de ilustración.
+   Los blancos y grises son neutros, sin tinte verde.
+   ============================================================ */
+
+.pl-store {
+  --pl-paper: #ffffff;
+  --pl-bone: #f2f2f2;
+  --pl-ink: #111112;
+  --pl-coal: #19191a;
+  --pl-ash: #242425;
+  --pl-smoke: #707073;
+  --pl-surface: #ffffff;
+  --pl-line: rgba(17, 17, 18, 0.12);
+  --pl-ember: #2457e6; /* acción principal: azul */
+  --pl-flame: #0f9d76; /* acento: verde */
+  --pl-blue: #2457e6;
+  --pl-green: #0f9d76;
+  --pl-green-bright: #5cf2c0;
+  --pl-blue-bright: #6ea8ff;
+  --pl-cold: #6b6b6e;
+
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--pl-paper);
+  color: var(--pl-ink);
+  font-family: "Sora", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pl-store ::selection {
+  background: var(--pl-ember);
+  color: #fff;
+}
+
+.pl-store :focus-visible {
+  outline: 2px solid var(--pl-ember);
+  outline-offset: 3px;
+}
+
+.pl-display {
+  font-family: "Oxanium", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.pl-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pl-container {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .pl-container {
+    padding-inline: 2rem;
+  }
+}
+
+.pl-header {
+  --pl-flame: var(--pl-green-bright);
+  background: var(--pl-ink);
+  color: var(--pl-paper);
+}
+
+.pl-dark-surface {
+  --pl-flame: var(--pl-green-bright);
+  --pl-blue: var(--pl-blue-bright);
+}
+
+.pl-gradient-line {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--pl-green-bright) 0%,
+    #14b8a6 48%,
+    var(--pl-ember) 100%
+  );
+}
+
+.pl-hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(92, 242, 192, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(110, 168, 255, 0.055) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.pl-text-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--pl-green-bright) 0%,
+    #14b8a6 48%,
+    var(--pl-blue-bright) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pl-btn-ink,
+.pl-btn-ember,
+.pl-btn-outline,
+.pl-btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid transparent;
+  padding: 0.75rem 1.1rem;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.pl-btn-ink {
+  background: var(--pl-ink);
+  color: var(--pl-paper);
+}
+
+.pl-btn-ink:hover {
+  background: var(--pl-ember);
+  color: #fff;
+}
+
+.pl-btn-ember {
+  background: var(--pl-ember);
+  color: #fff;
+}
+
+.pl-btn-ember:hover {
+  background: var(--pl-ink);
+}
+
+.pl-btn-outline {
+  border-color: color-mix(in oklab, var(--pl-ink) 25%, transparent);
+  color: var(--pl-ink);
+}
+
+.pl-btn-outline:hover {
+  border-color: var(--pl-ink);
+}
+
+.pl-btn-outline-light {
+  border-color: color-mix(in oklab, var(--pl-paper) 25%, transparent);
+  color: var(--pl-paper);
+}
+
+.pl-btn-outline-light:hover {
+  border-color: var(--pl-paper);
+}
+
+.pl-field {
+  width: 100%;
+  border: 1px solid color-mix(in oklab, var(--pl-ink) 20%, transparent);
+  background: transparent;
+  padding: 0.65rem 0.75rem;
+  color: var(--pl-ink);
+  font: inherit;
+  outline: none;
+}
+
+.pl-field::placeholder {
+  color: color-mix(in oklab, var(--pl-ink) 35%, transparent);
+}
+
+.pl-field:focus {
+  border-color: var(--pl-ink);
+}
+
+.pl-card-art {
+  background: var(--pl-bone);
+}
+
+.pl-drawer {
+  background: var(--pl-paper);
+  border-left: 1px solid color-mix(in oklab, var(--pl-ink) 15%, transparent);
+}
+
+.pl-overlay {
+  background: rgba(11, 9, 8, 0.6);
+}
+
+.pl-order-bar {
+  background: var(--pl-ink);
+  color: var(--pl-paper);
+}
+
+.pl-toast {
+  background: var(--pl-ink);
+  color: var(--pl-paper);
+}
+
+.pl-store .pl-scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+.pl-store .pl-scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes pl-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pl-store .pl-rise-in {
+  animation: pl-rise 0.45s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+/* ------------------------------------------------------------
+   Panel de administración
+   ------------------------------------------------------------ */
+
+.pl-admin {
+  --pa-canvas: #f5f5f5;
+  --pa-surface: #ffffff;
+  --pa-line: #e4e4e4;
+  --pa-line-strong: #d4d4d4;
+  --pa-ink: #121212;
+  --pa-muted: #6c6c6c;
+  --pa-accent: #2457e6;
+  --pa-accent-soft: #e9efff;
+  --pa-sidebar: #111112;
+  --pa-sidebar-line: #2b2b2d;
+  --pa-good: #4a4a4a;
+  --pa-good-soft: #f0f0f0;
+  --pa-warn: #8a5a00;
+  --pa-warn-soft: #fbf1d9;
+  --pa-bad: #a5211b;
+  --pa-bad-soft: #fbe9e8;
+
+  min-height: 100vh;
+  background: var(--pa-canvas);
+  color: var(--pa-ink);
+  font-family: "Sora", ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pl-admin ::selection {
+  background: var(--pa-accent);
+  color: #fff;
+}
+
+.pl-admin :focus-visible {
+  outline: 2px solid var(--pa-accent);
+  outline-offset: 2px;
+}
+
+.pl-admin .pl-admin-display {
+  font-family: "Oxanium", "Arial Narrow", sans-serif;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Vista previa de la portada: usa los tokens de la tienda aunque viva
+   dentro del panel claro. */
+.pl-admin .pl-hero-preview {
+  --pl-paper: #ffffff;
+  --pl-bone: #f2f2f2;
+  --pl-ink: #111112;
+  --pl-coal: #19191a;
+  --pl-ash: #242425;
+  --pl-smoke: #707073;
+  --pl-surface: #ffffff;
+  --pl-line: rgba(17, 17, 18, 0.12);
+  --pl-ember: #2457e6;
+  --pl-flame: #5cf2c0;
+  --pl-blue: #6ea8ff;
+  --pl-green: #0f9d76;
+  --pl-green-bright: #5cf2c0;
+  --pl-blue-bright: #6ea8ff;
+  --pl-cold: #6b6b6e;
+  font-family: "Sora", ui-sans-serif, system-ui, sans-serif;
+}
+
+.pl-admin .pl-admin-sidebar {
+  background: var(--pa-sidebar);
+  color: #f5f5f5;
+}
+
+.pl-admin .pl-admin-navlink {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  border-left: 2px solid transparent;
+  padding: 0.6rem 1rem;
+  color: #b3b3b6;
+  font-size: 13px;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pl-admin .pl-admin-navlink:hover {
+  background: #1a1a1c;
+  color: #fff;
+}
+
+.pl-admin .pl-admin-navlink[data-active="true"] {
+  border-left-color: #5cf2c0;
+  background: #1d1d1f;
+  color: #fff;
+}
+
+.pl-admin .pl-admin-card {
+  border: 1px solid var(--pa-line);
+  background: var(--pa-surface);
+}
+
+.pl-admin .pl-admin-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px solid var(--pa-line-strong);
+  background: var(--pa-surface);
+  padding: 0.5rem 0.8rem;
+  color: var(--pa-ink);
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pl-admin .pl-admin-btn:hover {
+  border-color: var(--pa-ink);
+}
+
+.pl-admin .pl-admin-btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 1px solid var(--pa-accent);
+  background: var(--pa-accent);
+  padding: 0.5rem 0.8rem;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.pl-admin .pl-admin-btn-accent:hover {
+  background: #1c45c4;
+}
+
+.pl-admin .pl-admin-input,
+.pl-admin .pl-admin-select {
+  width: 100%;
+  border: 1px solid var(--pa-line-strong);
+  background: var(--pa-surface);
+  padding: 0.5rem 0.65rem;
+  color: var(--pa-ink);
+  font: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.pl-admin .pl-admin-input:focus,
+.pl-admin .pl-admin-select:focus {
+  border-color: var(--pa-accent);
+}
+
+.pl-admin .pl-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.pl-admin .pl-admin-table th {
+  border-bottom: 1px solid var(--pa-line);
+  padding: 0.65rem 0.75rem;
+  color: var(--pa-muted);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pl-admin .pl-admin-table td {
+  border-bottom: 1px solid var(--pa-line);
+  padding: 0.65rem 0.75rem;
+  vertical-align: middle;
+}
+
+.pl-admin .pl-admin-table tr:hover td {
+  background: #fafafa;
+}
+
+.pl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.45rem;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.pl-badge-good {
+  background: var(--pa-good-soft);
+  color: var(--pa-good);
+}
+
+.pl-badge-warn {
+  background: var(--pa-warn-soft);
+  color: var(--pa-warn);
+}
+
+.pl-badge-bad {
+  background: var(--pa-bad-soft);
+  color: var(--pa-bad);
+}
+
+.pl-badge-muted {
+  background: #efefef;
+  color: var(--pa-muted);
+}
+
+.pl-admin .pl-admin-tab {
+  border-bottom: 2px solid transparent;
+  padding: 0.65rem 0.25rem;
+  color: var(--pa-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pl-admin .pl-admin-tab[data-active="true"] {
+  border-bottom-color: var(--pa-accent);
+  color: var(--pa-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pl-store .pl-rise-in {
+    animation: none;
+  }
+}

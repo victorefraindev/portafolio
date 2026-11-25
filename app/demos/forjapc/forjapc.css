@@ -1,0 +1,345 @@
+/* ============================================================
+   Forja PC — demo institucional aislada dentro del portafolio.
+   Showroom técnico: claro/grafito + naranja.
+   Todas las reglas viven bajo .fj-root para no tocar el sitio.
+   ============================================================ */
+
+.fj-root {
+  --fj-bg: #0c0e11;
+  --fj-bg-soft: #11151a;
+  --fj-surface: #161a20;
+  --fj-surface-2: #1b2027;
+  --fj-ink: #f4f5f7;
+  --fj-muted: #a7adb7;
+  --fj-faint: #727a86;
+  --fj-line: rgba(244, 245, 247, 0.14);
+  --fj-accent: #ff6a33;
+  --fj-accent-soft: rgba(255, 106, 51, 0.14);
+  --fj-graphite: #15181d;
+  --fj-graphite-2: #1b2027;
+  --fj-graphite-ink: #f4f5f7;
+  --fj-graphite-muted: #a7adb7;
+  --fj-art-body: #2a313b;
+  --fj-art-line: #f4f5f7;
+  --fj-art-accent: #ff6a33;
+  --fj-art-muted: #4c5561;
+  --fj-btn: #e8480f;
+  --fj-btn-hover: #c93a08;
+  --fj-shadow: rgba(0, 0, 0, 0.35);
+
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--fj-bg);
+  color: var(--fj-ink);
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] .fj-root {
+  --fj-bg: #f3f4f6;
+  --fj-bg-soft: #e8ebef;
+  --fj-surface: #ffffff;
+  --fj-surface-2: #eef1f4;
+  --fj-ink: #121417;
+  --fj-muted: #4e5561;
+  --fj-faint: #7b8290;
+  --fj-line: rgba(18, 20, 23, 0.14);
+  --fj-accent: #c93a08;
+  --fj-accent-soft: #ffe1d5;
+  --fj-graphite: #15181d;
+  --fj-graphite-2: #1b2027;
+  --fj-graphite-ink: #f4f5f7;
+  --fj-graphite-muted: #a7adb7;
+  --fj-art-body: #e4e7eb;
+  --fj-art-line: #121417;
+  --fj-art-accent: #c93a08;
+  --fj-art-muted: #b8bec7;
+  --fj-btn: #c93a08;
+  --fj-btn-hover: #a52f05;
+  --fj-shadow: rgba(18, 20, 23, 0.16);
+
+  color-scheme: light;
+}
+
+.fj-root h1,
+.fj-root h2,
+.fj-root h3 {
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.fj-container {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.fj-hero-glow {
+  position: absolute;
+  left: 50%;
+  top: -14rem;
+  width: 52rem;
+  height: 36rem;
+  transform: translateX(-50%);
+  background: radial-gradient(
+    closest-side,
+    var(--fj-accent-soft),
+    transparent 76%
+  );
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .fj-container {
+    padding-inline: 2rem;
+  }
+}
+
+.fj-display {
+  font-family: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.fj-mono {
+  font-family: "DM Mono", ui-monospace, monospace;
+}
+
+.fj-label {
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.64rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.fj-root ::selection {
+  background: var(--fj-accent);
+  color: #fff;
+}
+
+.fj-root :focus-visible {
+  outline: 2px solid var(--fj-accent);
+  outline-offset: 3px;
+}
+
+.fj-utility {
+  background: var(--fj-graphite);
+  color: var(--fj-graphite-ink);
+}
+
+.fj-header {
+  background: color-mix(in oklab, var(--fj-bg) 90%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.fj-nav-link {
+  font-size: 0.9rem;
+  color: var(--fj-muted);
+  transition: color 0.2s ease;
+}
+
+.fj-nav-link:hover {
+  color: var(--fj-ink);
+}
+
+.fj-nav-link[aria-current="page"] {
+  color: var(--fj-accent);
+}
+
+.fj-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--fj-btn);
+  background: var(--fj-btn);
+  padding: 0.8rem 1.25rem;
+  color: #fff;
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.fj-btn-primary:hover {
+  border-color: var(--fj-btn-hover);
+  background: var(--fj-btn-hover);
+}
+
+.fj-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--fj-line);
+  padding: 0.8rem 1.25rem;
+  color: var(--fj-ink);
+  font-weight: 700;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.fj-btn-secondary:hover {
+  border-color: var(--fj-accent);
+  color: var(--fj-accent);
+}
+
+.fj-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(244, 245, 247, 0.35);
+  padding: 0.8rem 1.25rem;
+  color: var(--fj-graphite-ink);
+  font-weight: 700;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.fj-btn-dark:hover {
+  background: var(--fj-graphite-ink);
+  color: var(--fj-graphite);
+}
+
+.fj-link {
+  text-decoration: underline;
+  text-decoration-color: var(--fj-line);
+  text-underline-offset: 4px;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.fj-link:hover {
+  color: var(--fj-accent);
+  text-decoration-color: var(--fj-accent);
+}
+
+.fj-card {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.fj-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--fj-accent);
+  box-shadow: 5px 5px 0 var(--fj-accent);
+}
+
+.fj-art-on-dark {
+  --fj-art-body: #2a313b;
+  --fj-art-line: #f4f5f7;
+  --fj-art-accent: #ff6a33;
+  --fj-art-muted: #4c5561;
+}
+
+.fj-on-dark .fj-spec-row {
+  border-color: rgba(244, 245, 247, 0.14);
+}
+
+.fj-rule {
+  width: 3rem;
+  height: 3px;
+  background: var(--fj-accent);
+}
+
+.fj-spec-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid var(--fj-line);
+  padding-block: 0.55rem;
+  font-size: 0.85rem;
+}
+
+.fj-spec-row:last-child {
+  border-bottom: 0;
+}
+
+.fj-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--fj-accent);
+  padding: 0.2rem 0.45rem;
+  color: var(--fj-accent);
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.fj-field {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid var(--fj-line);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.65rem 0;
+  color: var(--fj-ink);
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.fj-field::placeholder {
+  color: var(--fj-faint);
+}
+
+.fj-field:focus {
+  border-color: var(--fj-accent);
+}
+
+.fj-field-box {
+  border: 1px solid var(--fj-line);
+  padding: 0.65rem 0.8rem;
+  background: transparent;
+  color: var(--fj-ink);
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.fj-field-box::placeholder {
+  color: var(--fj-faint);
+}
+
+.fj-field-box:focus {
+  border-color: var(--fj-accent);
+}
+
+select.fj-field {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--fj-faint) 50%),
+    linear-gradient(135deg, var(--fj-faint) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 55%,
+    calc(100% - 9px) 55%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 1.5rem;
+}
+
+.fj-footer {
+  background: var(--fj-graphite);
+  color: var(--fj-graphite-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fj-card {
+    transition: none;
+  }
+
+  .fj-card:hover {
+    transform: none;
+  }
+}

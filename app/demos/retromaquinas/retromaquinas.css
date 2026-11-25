@@ -1,0 +1,341 @@
+/* ============================================================
+   Retromaquinas — demo aislada dentro del portafolio.
+   Estética de manual de taller: negro, blanco y azul oscuro.
+   Todas las reglas viven bajo .rm-root para no tocar el sitio.
+   ============================================================ */
+
+.rm-root {
+  --rm-bg: #04070d;
+  --rm-bg-soft: #07101f;
+  --rm-panel: #0b1528;
+  --rm-panel-2: #0e1d36;
+  --rm-ink: #f4f7fb;
+  --rm-muted: #9aa8c2;
+  --rm-faint: #6b7892;
+  --rm-line: rgba(244, 247, 251, 0.14);
+  --rm-accent: #2f6bff;
+  --rm-accent-soft: #7ea2ff;
+  --rm-navy: #071a33;
+  --rm-alert: #ff5a5f;
+  --rm-art-line: #dbe7ff;
+  --rm-art-fill: #0b1528;
+  --rm-art-accent: #2f6bff;
+  --rm-band-bg: #f4f7fb;
+  --rm-band-fg: #04070d;
+  --rm-band-muted: #3e4b63;
+  --rm-band-accent: #071a33;
+  --rm-band-accent-2: #1749c6;
+  --rm-shadow: rgba(0, 0, 0, 0.45);
+
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--rm-bg);
+  color: var(--rm-ink);
+  font-family: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  color-scheme: dark;
+}
+
+html[data-theme="light"] .rm-root {
+  --rm-bg: #f4f7fb;
+  --rm-bg-soft: #e8eef8;
+  --rm-panel: #ffffff;
+  --rm-panel-2: #eef3fb;
+  --rm-ink: #050a14;
+  --rm-muted: #3e4b63;
+  --rm-faint: #65738a;
+  --rm-line: rgba(5, 10, 20, 0.16);
+  --rm-accent: #1749c6;
+  --rm-accent-soft: #2f6bff;
+  --rm-navy: #071a33;
+  --rm-alert: #c81e2b;
+  --rm-art-line: #071a33;
+  --rm-art-fill: #ffffff;
+  --rm-art-accent: #1749c6;
+  --rm-band-bg: #071a33;
+  --rm-band-fg: #f4f7fb;
+  --rm-band-muted: #9aa8c2;
+  --rm-band-accent: #7ea2ff;
+  --rm-band-accent-2: #dbe7ff;
+  --rm-shadow: rgba(5, 10, 20, 0.18);
+
+  color-scheme: light;
+}
+
+.rm-root h1,
+.rm-root h2,
+.rm-root h3 {
+  font-family: "Anton", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.rm-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .rm-container {
+    padding-inline: 2rem;
+  }
+}
+
+.rm-nav {
+  background: color-mix(in oklab, var(--rm-bg) 88%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.rm-display {
+  font-family: "Anton", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.rm-label {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.rm-root ::selection {
+  background: var(--rm-accent);
+  color: #fff;
+}
+
+.rm-root :focus-visible {
+  outline: 2px solid var(--rm-accent);
+  outline-offset: 3px;
+}
+
+.rm-grid {
+  background-image:
+    linear-gradient(to right, var(--rm-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--rm-line) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.rm-glow {
+  background: radial-gradient(
+    circle at 50% 45%,
+    color-mix(in oklab, var(--rm-accent) 26%, transparent) 0%,
+    transparent 68%
+  );
+  filter: blur(48px);
+}
+
+.rm-figure {
+  position: relative;
+  border: 1px solid var(--rm-line);
+  background: var(--rm-panel);
+}
+
+.rm-figure::before,
+.rm-figure::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--rm-accent);
+  border-style: solid;
+  pointer-events: none;
+}
+
+.rm-figure::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.rm-figure::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.rm-card {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.rm-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--rm-accent);
+  box-shadow: 5px 5px 0 var(--rm-accent);
+}
+
+.rm-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid currentColor;
+  padding: 0.45rem 0.75rem;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-6deg);
+}
+
+.rm-band {
+  background: var(--rm-band-bg);
+  color: var(--rm-band-fg);
+}
+
+.rm-band-accent {
+  color: var(--rm-band-accent);
+}
+
+.rm-band-accent-2 {
+  color: var(--rm-band-accent-2);
+}
+
+.rm-band-rule {
+  border-color: color-mix(in oklab, var(--rm-band-fg) 18%, transparent);
+}
+
+.rm-ticket {
+  border: 1px solid var(--rm-line);
+  background: var(--rm-panel);
+  box-shadow: 7px 7px 0 var(--rm-shadow);
+}
+
+.rm-field {
+  width: 100%;
+  appearance: none;
+  border: 0;
+  border-bottom: 1px solid var(--rm-line);
+  border-radius: 0;
+  background: transparent;
+  padding: 0.65rem 0;
+  color: var(--rm-ink);
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.rm-field::placeholder {
+  color: var(--rm-faint);
+}
+
+.rm-field:focus {
+  border-color: var(--rm-accent);
+}
+
+.rm-field-box {
+  border: 1px solid var(--rm-line);
+  padding: 0.65rem 0.8rem;
+  background: transparent;
+  color: var(--rm-ink);
+  font: inherit;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.rm-field-box::placeholder {
+  color: var(--rm-faint);
+}
+
+.rm-field-box:focus {
+  border-color: var(--rm-accent);
+}
+
+select.rm-field {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--rm-faint) 50%),
+    linear-gradient(135deg, var(--rm-faint) 50%, transparent 50%);
+  background-position:
+    calc(100% - 14px) 55%,
+    calc(100% - 9px) 55%;
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 1.5rem;
+}
+
+.rm-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1749c6;
+  background: #1749c6;
+  padding: 0.8rem 1.2rem;
+  color: #fff;
+  font-weight: 600;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.rm-btn-primary:hover {
+  border-color: #2f6bff;
+  background: #2f6bff;
+}
+
+.rm-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--rm-line);
+  padding: 0.8rem 1.2rem;
+  color: var(--rm-ink);
+  font-weight: 600;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.rm-btn-secondary:hover {
+  border-color: var(--rm-accent);
+  color: var(--rm-accent);
+}
+
+.rm-link {
+  text-decoration: underline;
+  text-decoration-color: var(--rm-line);
+  text-underline-offset: 4px;
+  transition:
+    color 0.2s ease,
+    text-decoration-color 0.2s ease;
+}
+
+.rm-link:hover {
+  color: var(--rm-accent);
+  text-decoration-color: var(--rm-accent);
+}
+
+@keyframes rm-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.rm-pulse {
+  animation: rm-pulse 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rm-card {
+    transition: none;
+  }
+
+  .rm-card:hover {
+    transform: none;
+  }
+
+  .rm-pulse {
+    animation: none;
+  }
+}
